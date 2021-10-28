@@ -5,3 +5,11 @@
 .btn{
     @apply font-bold py-2 px-4 rounded;
 }
+
+html{
+    @apply h-full bg-gray-100;
+}
+
+body{
+    @apply h-full;
+}
