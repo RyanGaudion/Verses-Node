@@ -15,7 +15,7 @@
     "nodemon": "^2.0.14"
   },
   "scripts": {
-    "build-css": "tailwindcss build -i private/style.css -o public/style.css",
+    "build-css": "tailwindcss build -i private/style.css -o public/css/style.css",
     "dev": "nodemon app.js"
   },
   "repository": {
