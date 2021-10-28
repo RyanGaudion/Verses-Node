@@ -3,10 +3,30 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "dependencies": {
+    "autoprefixer": "^10.4.0",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.17"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-css": "tailwindcss build -i private/style.css -o public/style.css",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanGaudion/Verses-Node.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyanGaudion/Verses-Node/issues"
+  },
+  "homepage": "https://github.com/RyanGaudion/Verses-Node#readme"
 }
