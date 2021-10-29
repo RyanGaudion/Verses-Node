@@ -12,6 +12,15 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+app.get("/history", (req, res) => {
+    res.render("history");
+});
+
+app.get("/stats", (req, res) => {
+    res.render("stats");
+});
+
+
 
 app.listen(WEB_PORT, () => {
 console.log(`Verses app listening at http://localhost:${WEB_PORT}`);
