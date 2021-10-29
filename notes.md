@@ -7,3 +7,11 @@ npm install tailwincss
   },
 
 npm run build-css
+
+
+
+History Page (Has Search & Add Button)
+Stats Page Total, Old and New Testament
+
+Record Page - Allows entry of a book, start chapter and end chapter & Notes??
+
