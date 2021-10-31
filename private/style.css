@@ -20,3 +20,9 @@ body{
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
+
+/* Custom Card */
+.custom-card {
+    @apply 2xl:max-w-5xl lg:max-w-3xl md:max-w-2xl sm:max-w-lg max-w-md mx-auto px-3 py-2 md:px-6 md:py-6 bg-white rounded-lg shadow-xl;
+}
