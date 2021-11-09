@@ -24,8 +24,6 @@ app.get("/createRecord", (req, res) => {
     res.render("createUpdateRecord");
 });
 
-
-
 app.listen(WEB_PORT, () => {
 console.log(`Verses app listening at http://localhost:${WEB_PORT}`);
 });
