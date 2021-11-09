@@ -15,3 +15,10 @@ Stats Page Total, Old and New Testament
 
 Record Page - Allows entry of a book, start chapter and end chapter & Notes??
 
+
+
+Controller:
+- ReadingRecord - Create Method, Update Method, Delete, List (Paged)
+- Stats - Read (Pipeline)
+
+- Review & Notes of Books??

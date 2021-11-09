@@ -20,6 +20,10 @@ app.get("/stats", (req, res) => {
     res.render("stats");
 });
 
+app.get("/createRecord", (req, res) => {
+    res.render("createUpdateRecord");
+});
+
 
 
 app.listen(WEB_PORT, () => {
