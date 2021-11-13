@@ -3,9 +3,8 @@
 
 <head>
     <%- include('common/head'); -%>
-    <title>History</title>
+    <title>Create Update Record</title>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-   
 </head>
 
 <body>
@@ -15,6 +14,57 @@
         <div class="px-4 md:container py-8 md:py-14 space-y-6 md:space-y-10">
 
             <%- include('common/dateTimePicker.ejs'); -%>
+            
+
+            <!--Book Component-->
+            <div x-data="{ 
+                selectedBookName: '',
+                selectedStart: '',
+
+                books: [
+                    {name : 'Matthew', size : 28},
+                    {name : 'Mark', size : 16},
+                    {name : 'Luke', size : 24},
+                    {name : 'John', size : 21}
+                ],
+                get currentItem(){
+                    return this.books.filter(i => i.name == this.selectedBookName)[0]
+                }
+            }">
+
+                <!-- Book Selection -->
+                <label class="block text-left" style="max-width: 400px">
+                    <span class="font-bold mb-1 text-gray-700 block">Select Book</span>
+                    <select x-model="selectedBookName" class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none text-gray-600 font-medium focus:ring focus:ring-blue-600 focus:ring-opacity-50">
+                        <option x-bind:disabled="typeof currentItem !== 'undefined' ? '' : 'disabled'" selected value> -- Select a book -- </option>
+                        <template x-for="book in books" :key="book">
+                            <option x-text="book.name"></option>
+                        </template>
+                    </select>
+                </label>
+    
+                <!-- Chapter from-->
+                <label class="block text-left" style="max-width: 400px">
+                    <span class="font-bold mb-1 text-gray-700 block">Select Start Chapter</span>
+                    <select x-model="selectedStart" class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none text-gray-600 font-medium focus:ring focus:ring-blue-600 focus:ring-opacity-50">
+                        <option x-bind:disabled="typeof currentItem !== 'undefined' ? '' : 'disabled'" selected value> -- Select a Start Chapter -- </option>
+                        <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.size : 0)">
+                        <option x-text="i"></option>
+                      </template>
+                    </select>
+                </label>
+    
+                <!-- Chapter to-->
+                <label class="block text-left" style="max-width: 400px">
+                    <span class="font-bold mb-1 text-gray-700 block">Select End Chapter</span>
+                    <select class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none text-gray-600 font-medium focus:ring focus:ring-blue-600 focus:ring-opacity-50">
+                        <option disabled selected value> -- Select an end chapter -- </option>
+                        <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.size - (typeof selectedStart !== 'undefined' ? (selectedStart - 1) : 0): 0)">
+                            <option x-text="i + (typeof selectedStart !== 'undefined' ? (+selectedStart - 1)  : 0)"></option>
+                        </template>
+                    </select>
+                </label>
+            </div>
             
         </div>
     </div>
