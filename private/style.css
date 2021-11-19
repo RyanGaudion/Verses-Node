@@ -21,6 +21,7 @@ body{
     scrollbar-width: none;  /* Firefox */
 }
 
+select:invalid { @apply text-gray-500; }
  
 /* Custom Card */
 .custom-card {

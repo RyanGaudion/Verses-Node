@@ -21,7 +21,7 @@ app.get("/stats", (req, res) => {
 });
 
 app.get("/record", (req, res) => {
-    res.render("createUpdateRecord");
+    res.render("record");
 });
 
 app.get("/login", (req, res) => {
