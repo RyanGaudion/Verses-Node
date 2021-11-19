@@ -20,9 +20,17 @@ app.get("/stats", (req, res) => {
     res.render("stats");
 });
 
-app.get("/createRecord", (req, res) => {
+app.get("/record", (req, res) => {
     res.render("createUpdateRecord");
 });
+
+app.get("/login", (req, res) => {
+    res.render("login");
+})
+
+app.get("/register", (req, res) => {
+    res.render("register");
+})
 
 app.listen(WEB_PORT, () => {
 console.log(`Verses app listening at http://localhost:${WEB_PORT}`);

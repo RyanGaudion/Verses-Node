@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@tailwindcss/forms": "^0.3.4",
     "autoprefixer": "^10.4.0",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
@@ -18,7 +19,7 @@
     "build-css": "tailwindcss build -i private/style.css -o public/css/style.css",
     "build-css-prod": "tailwindcss build -i private/style.css -o public/css/style.css --jit --purge \"./**/*.ejs\" \"./**/*.html\"",
     "dev-purge": "nodemon -e js,ejs,json,html --exec \"npm run build-css-prod && node app.js\"",
-    "dev" : "nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
