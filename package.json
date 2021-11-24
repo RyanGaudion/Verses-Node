@@ -16,6 +16,7 @@
     "nodemon": "^2.0.14"
   },
   "scripts": {
+    "start" : "npm run build-css-prod && node app.js",
     "build-css": "tailwindcss build -i private/style.css -o public/css/style.css",
     "build-css-prod": "tailwindcss build -i private/style.css -o public/css/style.css --jit --purge \"./**/*.ejs\" \"./**/*.html\"",
     "dev-purge": "nodemon -e js,ejs,json,html --exec \"npm run build-css-prod && node app.js\"",

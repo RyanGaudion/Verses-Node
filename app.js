@@ -4,7 +4,7 @@ const path = require("path");
 const app = express();
 app.set("view engine", "ejs");
 
-const { WEB_PORT } = process.env;
+const { PORT } = process.env;
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -32,6 +32,6 @@ app.get("/register", (req, res) => {
     res.render("register");
 })
 
-app.listen(WEB_PORT, () => {
-console.log(`Verses app listening at http://localhost:${WEB_PORT}`);
+app.listen(PORT, () => {
+console.log(`Verses app listening at http://localhost:${PORT}`);
 });
