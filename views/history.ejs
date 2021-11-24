@@ -21,13 +21,15 @@
                     </svg>
                 </div>
                 <!--Add Button-->
-                <button type="button" class="inline-flex items-center px-3 py-1 md:px-4 md:py-2 border border-transparent rounded-md shadow-sm text-xs md:text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-                    <!-- Heroicon name: solid/eye -->
-                    <svg class="sm:-ml-1 sm:mr-2 h-4 w-4 md:h-5 md:w-5" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                    <p class="hidden sm:block">Add</p>
-                </button>
+                <form action="/record">
+                    <button type="button" class="inline-flex items-center px-3 py-1 md:px-4 md:py-2 border border-transparent rounded-md shadow-sm text-xs md:text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                        <!-- Heroicon name: solid/eye -->
+                        <svg class="sm:-ml-1 sm:mr-2 h-4 w-4 md:h-5 md:w-5" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        <p class="hidden sm:block">Add</p>
+                    </button>
+                </form>
             </div>
 
             <%- include('common/historyCard'); -%>
