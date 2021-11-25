@@ -5,7 +5,7 @@ exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
-            res.render('login', { errors: { message: 'Email not found' } })
+            res.render('login', { errors: { message: 'Email not found' }, message: null })
             return;
         }
 
@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
             return
         }
 
-        res.render('login', { errors: { message: 'Incorrect Password' } })
+        res.render('login', { errors: { message: 'Incorrect Password' }, message: null })
 
 
     } catch (e) {
@@ -50,33 +50,6 @@ exports.register = async (req, res) => {
         }
         else if((e.name==='MongoError' || e.name ==='MongoServerError') && e.code === 11000 ){
             res.render('register', { errors: {message: "Duplicate Email Error"}})
-            return;
-        }
-        return res.status(400).send({
-            message: JSON.parse(e),
-        });
-
-
-
-
-
-
-        console.log("Error");
-        console.log(e);
-        if(e.MongoServerError){
-            if(e.MongoServerError.includes("duplicate key error")){
-                e.message = "Account with that email already exists";
-            }
-            else{
-                e.message = "unknown mongo error";
-            }
-            res.render('register', { errors: e });
-                return;
-        }
-        if (e.errors) {
-            console.log("e.Errors");
-            console.log(e.errors);
-            res.render('register', { errors: e.errors });
             return;
         }
         return res.status(400).send({
