@@ -62,7 +62,7 @@ app.get("/", authMiddleware, (req, res) => {
     res.render("index");
 });
 
-app.get("/history", authMiddleware, recordController.listByUser);
+app.get("/history", authMiddleware, recordController.search);
 
 app.get("/stats", authMiddleware, (req, res) => {
     res.render("stats");

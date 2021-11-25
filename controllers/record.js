@@ -2,19 +2,25 @@ const User = require('../models/User');
 const Record = require('../models/Record');
 const { isValidObjectId } = require('mongoose');
 
-exports.listByUser = async(req, res) => {
- try{
-    const user = await User.findById(req.session.userID);
-    console.log(user);
 
-    const records = await Record.find({user_id: user._id})
-
-    res.render("history", {records: records});
- }
- catch(e){
-    console.log(e);
-    res.status(404).send({message: "could not list records"});
- }
+exports.search = async(req, res) => {
+    try{
+       const user = await User.findById(req.session.userID);
+       const search = req.query.search;
+       var records;
+       if(search){
+        records = await Record.find({user_id: user._id, book: {$regex : "(?i)^" + search}})
+       }
+       else{
+        records = await Record.find({user_id: user._id})
+       }
+   
+       res.render("history", {records: records, query: search});
+    }
+    catch(e){
+       console.log(e);
+       res.status(404).send({message: "could not list records"});
+    }
 };
 
 exports.create = async(req, res) => {
