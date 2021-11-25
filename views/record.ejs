@@ -28,12 +28,7 @@
                             selectedBookName: '',
                             selectedStart: '',
 
-                            books: [
-                                {name : 'Matthew', size : 28},
-                                {name : 'Mark', size : 16},
-                                {name : 'Luke', size : 24},
-                                {name : 'John', size : 21}
-                            ],
+                            books:<%= JSON.stringify(books); %>,
                             get currentItem(){
                                 return this.books.filter(i => i.name == this.selectedBookName)[0]
                             }
@@ -52,7 +47,7 @@
                             <label for="start-chapter" class="sr-only">Start Chapter</label>
                             <select id="start-chapter" name="start-chapter" x-model="selectedStart" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                                 <option x-bind:disabled="typeof currentItem !== 'undefined' ? '' : 'disabled'" selected value> -- Select a Start Chapter -- </option>
-                                <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.size : 0)">
+                                <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.chapters : 0)">
                                     <option x-text="i"></option>
                                 </template>
                             </select>
@@ -61,7 +56,7 @@
                             <label for="end-chapter" class="sr-only">End Chapter</label>
                             <select id="end-chapter" name="end-chapter" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                                 <option disabled selected value> -- Select an end chapter -- </option>
-                                <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.size - (typeof selectedStart !== 'undefined' ? (selectedStart - 1) : 0): 0)">
+                                <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.chapters - (typeof selectedStart !== 'undefined' ? (selectedStart - 1) : 0): 0)">
                                     <option x-text="i + (typeof selectedStart !== 'undefined' ? (+selectedStart - 1)  : 0)"></option>
                                 </template>
                             </select>
@@ -81,8 +76,6 @@
                   </form>
                 </div>
               </div>
-
-
         </div>
     </div>
 </body>
