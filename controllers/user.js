@@ -34,7 +34,7 @@ exports.register = async (req, res) => {
         if(req.body.confirm_password == req.body.password){
             const user = new User({ email: req.body.email, password: req.body.password, fullname: req.body.fullname });
             await user.save();
-            res.redirect('/login/?message=account created')
+            res.redirect('/login/?message=Account created - please sign in')
         }
         else{
             console.log("Passwords don't match");
