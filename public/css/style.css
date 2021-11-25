@@ -1464,6 +1464,11 @@ select {
   color: rgba(79, 70, 229, var(--tw-text-opacity));
 }
 
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgba(220, 38, 38, var(--tw-text-opacity));
+}
+
 .text-indigo-500 {
   --tw-text-opacity: 1;
   color: rgba(99, 102, 241, var(--tw-text-opacity));
