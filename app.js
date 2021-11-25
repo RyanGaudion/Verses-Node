@@ -70,6 +70,7 @@ app.get("/stats", authMiddleware, (req, res) => {
 });
 
 app.get("/record", authMiddleware, recordController.list);
+app.post("/createRecord", authMiddleware, recordController.create);
 
 app.get("/login", (req, res) => {
     var reqMessage = req.query.message;

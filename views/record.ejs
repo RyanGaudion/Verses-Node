@@ -19,7 +19,7 @@
                       Create/Edit your record
                     </h2>
                   </div>
-                  <form class="mt-8 space-y-6" action="#" method="POST">
+                  <form class="mt-8 space-y-6" action="/createRecord" method="POST">
 
                     <%- include('common/dateTimePicker.ejs'); -%>
 
@@ -44,8 +44,8 @@
                             </select>
                 
                             <!-- Chapter from-->
-                            <label for="start-chapter" class="sr-only">Start Chapter</label>
-                            <select id="start-chapter" name="start-chapter" x-model="selectedStart" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                            <label for="startchapter" class="sr-only">Start Chapter</label>
+                            <select id="startchapter" name="startchapter" x-model="selectedStart" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                                 <option x-bind:disabled="typeof currentItem !== 'undefined' ? '' : 'disabled'" selected value> -- Select a Start Chapter -- </option>
                                 <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.chapters : 0)">
                                     <option x-text="i"></option>
@@ -53,8 +53,8 @@
                             </select>
                 
                             <!-- Chapter to-->
-                            <label for="end-chapter" class="sr-only">End Chapter</label>
-                            <select id="end-chapter" name="end-chapter" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                            <label for="endchapter" class="sr-only">End Chapter</label>
+                            <select id="endchapter" name="endchapter" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                                 <option disabled selected value> -- Select an end chapter -- </option>
                                 <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.chapters - (typeof selectedStart !== 'undefined' ? (selectedStart - 1) : 0): 0)">
                                     <option x-text="i + (typeof selectedStart !== 'undefined' ? (+selectedStart - 1)  : 0)"></option>
