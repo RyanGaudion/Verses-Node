@@ -1,14 +1,20 @@
-const Book = require('../models/Book');
 const User = require('../models/User');
 const Record = require('../models/Record');
+const { isValidObjectId } = require('mongoose');
 
-exports.list = async(req, res) =>{
-    try{
-        const books = await Book.find({}, 'name chapters');
-        res.render("record", {books: books});
-    }catch(e){
-        res.status(404).send({message: "could not list books"});
-    }
+exports.listByUser = async(req, res) => {
+ try{
+    const user = await User.findById(req.session.userID);
+    console.log(user);
+
+    const records = await Record.find({user_id: user._id})
+
+    res.render("history", {records: records});
+ }
+ catch(e){
+    console.log(e);
+    res.status(404).send({message: "could not list records"});
+ }
 };
 
 exports.create = async(req, res) => {
@@ -32,7 +38,7 @@ exports.create = async(req, res) => {
             chapters: chapterArr
         });
 
-        res.render("stats");
+        res.redirect("/history");
     }
     catch(e){
         console.log(e);

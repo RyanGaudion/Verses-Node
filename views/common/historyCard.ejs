@@ -6,13 +6,13 @@
         <div class="md:pt-1 space-y-1 md:space-y-3 w-8/12">
             <!--Container-->
             <h4 class="ml-1 md:ml-0 text-base md:text-xl font-normal text-gray-900">
-                <span class="hidden md:inline">Thursday</span>
-                <span>26th October 2021</span>
+                <span class="hidden md:inline"><%= data.date.toLocaleString('default', { weekday: 'long'}); %></span>
+                <span><%= data.date.toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric' }); %></span>
             </h4>
             
             <div class="inline-flex items-center space-x-1 md:space-x-3 max-w-full overflow-x-scroll no-scrollbar">
-                <p class="text-xs font-normal md:text-base text-white bg-gradient-to-r from-indigo-500 to-indigo-500 px-2 md:px-3.5 py-0.5 rounded-full whitespace-nowrap">Matthew 1-4</p>
-                <p class="text-xs font-normal md:text-base text-white bg-gradient-to-r from-indigo-500 to-indigo-500 px-2 md:px-3.5 py-0.5 rounded-full whitespace-nowrap">Mark 1</p>
+                <p class="text-xs font-normal md:text-base text-white bg-gradient-to-r from-indigo-500 to-indigo-500 px-2 md:px-3.5 py-0.5 rounded-full whitespace-nowrap"><%= data.book %></p>
+                <p class="text-xs font-normal md:text-base text-white bg-gradient-to-r from-indigo-500 to-indigo-500 px-2 md:px-3.5 py-0.5 rounded-full whitespace-nowrap"><%= data.chapters.length %> Chapters</p>
             </div>
         </div>
         <!--Right Button Section-->
@@ -36,4 +36,5 @@
             </button>
         </div>
     </div>
+    
 </div>
