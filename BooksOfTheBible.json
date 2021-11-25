@@ -1,662 +1,662 @@
 [
     {
-      "Number": 1,
-      "Book": "Genesis",
-      "Chapters": 50,
-      "Verses": 1533,
-      "Words": 38262,
-      "Author": "Moses",
-      "Genre": "Law",
-      "Testament": "OT"
-    },
-    {
-      "Number": 2,
-      "Book": "Exodus",
-      "Chapters": 40,
-      "Verses": 1213,
-      "Words": 32685,
-      "Author": "Moses",
-      "Genre": "Law",
-      "Testament": "OT"
-    },
-    {
-      "Number": 3,
-      "Book": "Leviticus",
-      "Chapters": 27,
-      "Verses": 859,
-      "Words": 24541,
-      "Author": "Moses",
-      "Genre": "Law",
-      "Testament": "OT"
-    },
-    {
-      "Number": 4,
-      "Book": "Numbers",
-      "Chapters": 36,
-      "Verses": 1289,
-      "Words": 32896,
-      "Author": "Moses",
-      "Genre": "Law",
-      "Testament": "OT"
-    },
-    {
-      "Number": 5,
-      "Book": "Deuteronomy",
-      "Chapters": 34,
-      "Verses": 959,
-      "Words": 28352,
-      "Author": "Moses",
-      "Genre": "Law",
-      "Testament": "OT"
-    },
-    {
-      "Number": 6,
-      "Book": "Joshua",
-      "Chapters": 24,
-      "Verses": 658,
-      "Words": 18854,
-      "Author": "Unknown",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 7,
-      "Book": "Judges",
-      "Chapters": 21,
-      "Verses": 618,
-      "Words": 18966,
-      "Author": "Unknown",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 8,
-      "Book": "Ruth",
-      "Chapters": 4,
-      "Verses": 85,
-      "Words": 2574,
-      "Author": "Unknown",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 9,
-      "Book": "1 Samuel",
-      "Chapters": 31,
-      "Verses": 810,
-      "Words": 25048,
-      "Author": "Unknown",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 10,
-      "Book": "2 Samuel",
-      "Chapters": 24,
-      "Verses": 695,
-      "Words": 20600,
-      "Author": "Unknown",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 11,
-      "Book": "1 Kings",
-      "Chapters": 22,
-      "Verses": 816,
-      "Words": 24513,
-      "Author": "Unknown",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 12,
-      "Book": "2 Kings",
-      "Chapters": 25,
-      "Verses": 719,
-      "Words": 23517,
-      "Author": "Unknown",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 13,
-      "Book": "1 Chronicles",
-      "Chapters": 29,
-      "Verses": 942,
-      "Words": 20365,
-      "Author": "Ezra",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 14,
-      "Book": "2 Chronicles",
-      "Chapters": 36,
-      "Verses": 822,
-      "Words": 26069,
-      "Author": "Ezra",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 15,
-      "Book": "Ezra",
-      "Chapters": 10,
-      "Verses": 280,
-      "Words": 7440,
-      "Author": "Ezra",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 16,
-      "Book": "Nehemiah",
-      "Chapters": 13,
-      "Verses": 406,
-      "Words": 10480,
-      "Author": "Nehemiah",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 17,
-      "Book": "Esther",
-      "Chapters": 10,
-      "Verses": 167,
-      "Words": 5633,
-      "Author": "Unknown",
-      "Genre": "History",
-      "Testament": "OT"
-    },
-    {
-      "Number": 18,
-      "Book": "Job",
-      "Chapters": 42,
-      "Verses": 1070,
-      "Words": 18098,
-      "Author": "Unknown",
-      "Genre": "Poetry",
-      "Testament": "OT"
-    },
-    {
-      "Number": 19,
-      "Book": "Psalms",
-      "Chapters": 150,
-      "Verses": 2461,
-      "Words": 42704,
-      "Author": "Various",
-      "Genre": "Poetry",
-      "Testament": "OT"
-    },
-    {
-      "Number": 20,
-      "Book": "Proverbs",
-      "Chapters": 31,
-      "Verses": 915,
-      "Words": 15038,
-      "Author": "Solomon",
-      "Genre": "Poetry",
-      "Testament": "OT"
-    },
-    {
-      "Number": 21,
-      "Book": "Ecclesiastes",
-      "Chapters": 12,
-      "Verses": 222,
-      "Words": 5579,
-      "Author": "Solomon",
-      "Genre": "Poetry",
-      "Testament": "OT"
-    },
-    {
-      "Number": 22,
-      "Book": "Song of Solomon",
-      "Chapters": 8,
-      "Verses": 117,
-      "Words": 2658,
-      "Author": "Solomon",
-      "Genre": "Poetry",
-      "Testament": "OT"
-    },
-    {
-      "Number": 23,
-      "Book": "Isaiah",
-      "Chapters": 66,
-      "Verses": 1292,
-      "Words": 37036,
-      "Author": "Isaiah",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 24,
-      "Book": "Jeremiah",
-      "Chapters": 52,
-      "Verses": 1364,
-      "Words": 42654,
-      "Author": "Jeremiah",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 25,
-      "Book": "Lamentations",
-      "Chapters": 5,
-      "Verses": 154,
-      "Words": 3411,
-      "Author": "Jeremiah",
-      "Genre": "Poetry",
-      "Testament": "OT"
-    },
-    {
-      "Number": 26,
-      "Book": "Ezekiel",
-      "Chapters": 48,
-      "Verses": 1273,
-      "Words": 39401,
-      "Author": "Ezekiel",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 27,
-      "Book": "Daniel",
-      "Chapters": 12,
-      "Verses": 357,
-      "Words": 11602,
-      "Author": "Daniel",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 28,
-      "Book": "Hosea",
-      "Chapters": 14,
-      "Verses": 197,
-      "Words": 5174,
-      "Author": "Hosea",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 29,
-      "Book": "Joel",
-      "Chapters": 3,
-      "Verses": 73,
-      "Words": 2033,
-      "Author": "Joel",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 30,
-      "Book": "Amos",
-      "Chapters": 9,
-      "Verses": 146,
-      "Words": 4216,
-      "Author": "Amos",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 31,
-      "Book": "Obadiah",
-      "Chapters": 1,
-      "Verses": 21,
-      "Words": 669,
-      "Author": "Obadiah",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 32,
-      "Book": "Jonah",
-      "Chapters": 4,
-      "Verses": 48,
-      "Words": 1320,
-      "Author": "Jonah",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 33,
-      "Book": "Micah",
-      "Chapters": 7,
-      "Verses": 105,
-      "Words": 3152,
-      "Author": "Micah",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 34,
-      "Book": "Nahum",
-      "Chapters": 3,
-      "Verses": 47,
-      "Words": 1284,
-      "Author": "Nahum",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 35,
-      "Book": "Habakkuk",
-      "Chapters": 3,
-      "Verses": 56,
-      "Words": 1475,
-      "Author": "Habakkuk",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 36,
-      "Book": "Zephaniah",
-      "Chapters": 3,
-      "Verses": 53,
-      "Words": 1616,
-      "Author": "Zephaniah",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 37,
-      "Book": "Haggai",
-      "Chapters": 2,
-      "Verses": 38,
-      "Words": 1130,
-      "Author": "Haggai",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 38,
-      "Book": "Zechariah",
-      "Chapters": 14,
-      "Verses": 211,
-      "Words": 6443,
-      "Author": "Zechariah",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 39,
-      "Book": "Malachi",
-      "Chapters": 4,
-      "Verses": 55,
-      "Words": 1781,
-      "Author": "Malachi",
-      "Genre": "Prophecy",
-      "Testament": "OT"
-    },
-    {
-      "Number": 40,
-      "Book": "Matthew",
-      "Chapters": 28,
-      "Verses": 1071,
-      "Words": 23343,
-      "Author": "Matthew",
-      "Genre": "Gospel",
-      "Testament": "NT"
-    },
-    {
-      "Number": 41,
-      "Book": "Mark",
-      "Chapters": 16,
-      "Verses": 678,
-      "Words": 14949,
-      "Author": "Mark",
-      "Genre": "Gospel",
-      "Testament": "NT"
-    },
-    {
-      "Number": 42,
-      "Book": "Luke",
-      "Chapters": 24,
-      "Verses": 1151,
-      "Words": 25640,
-      "Author": "Luke",
-      "Genre": "Gospel",
-      "Testament": "NT"
-    },
-    {
-      "Number": 43,
-      "Book": "John",
-      "Chapters": 21,
-      "Verses": 879,
-      "Words": 18658,
-      "Author": "John",
-      "Genre": "Gospel",
-      "Testament": "NT"
-    },
-    {
-      "Number": 44,
-      "Book": "Acts",
-      "Chapters": 28,
-      "Verses": 1007,
-      "Words": 24229,
-      "Author": "Luke",
-      "Genre": "History",
-      "Testament": "NT"
-    },
-    {
-      "Number": 45,
-      "Book": "Romans",
-      "Chapters": 16,
-      "Verses": 433,
-      "Words": 9422,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 46,
-      "Book": "1 Corinthians",
-      "Chapters": 16,
-      "Verses": 437,
-      "Words": 9462,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 47,
-      "Book": "2 Corinthians",
-      "Chapters": 13,
-      "Verses": 257,
-      "Words": 6046,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 48,
-      "Book": "Galatians",
-      "Chapters": 6,
-      "Verses": 149,
-      "Words": 3084,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 49,
-      "Book": "Ephesians",
-      "Chapters": 6,
-      "Verses": 155,
-      "Words": 3022,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 50,
-      "Book": "Philippians",
-      "Chapters": 4,
-      "Verses": 104,
-      "Words": 2183,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 51,
-      "Book": "Colossians",
-      "Chapters": 4,
-      "Verses": 95,
-      "Words": 1979,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 52,
-      "Book": "1 Thessalonians",
-      "Chapters": 5,
-      "Verses": 89,
-      "Words": 1837,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 53,
-      "Book": "2 Thessalonians",
-      "Chapters": 3,
-      "Verses": 47,
-      "Words": 1022,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 54,
-      "Book": "1 Timothy",
-      "Chapters": 6,
-      "Verses": 113,
-      "Words": 2244,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 55,
-      "Book": "2 Timothy",
-      "Chapters": 4,
-      "Verses": 83,
-      "Words": 1666,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 56,
-      "Book": "Titus",
-      "Chapters": 3,
-      "Verses": 46,
-      "Words": 896,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 57,
-      "Book": "Philemon",
-      "Chapters": 1,
-      "Verses": 25,
-      "Words": 430,
-      "Author": "Paul",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 58,
-      "Book": "Hebrews",
-      "Chapters": 13,
-      "Verses": 303,
-      "Words": 6897,
-      "Author": "Unknown",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 59,
-      "Book": "James",
-      "Chapters": 5,
-      "Verses": 108,
-      "Words": 2304,
-      "Author": "James",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 60,
-      "Book": "1 Peter",
-      "Chapters": 5,
-      "Verses": 105,
-      "Words": 2476,
-      "Author": "Peter",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 61,
-      "Book": "2 Peter",
-      "Chapters": 3,
-      "Verses": 61,
-      "Words": 1553,
-      "Author": "Peter",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 62,
-      "Book": "1 John",
-      "Chapters": 5,
-      "Verses": 105,
-      "Words": 2517,
-      "Author": "John",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 63,
-      "Book": "2 John",
-      "Chapters": 1,
-      "Verses": 13,
-      "Words": 298,
-      "Author": "John",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 64,
-      "Book": "3 John",
-      "Chapters": 1,
-      "Verses": 14,
-      "Words": 294,
-      "Author": "John",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 65,
-      "Book": "Jude",
-      "Chapters": 1,
-      "Verses": 25,
-      "Words": 608,
-      "Author": "Jude",
-      "Genre": "Letter",
-      "Testament": "NT"
-    },
-    {
-      "Number": 66,
-      "Book": "Revelation",
-      "Chapters": 22,
-      "Verses": 404,
-      "Words": 11952,
-      "Author": "John",
-      "Genre": "Prophecy",
-      "Testament": "NT"
+      "number": 1,
+      "name": "Genesis",
+      "chapters": 50,
+      "verses": 1533,
+      "words": 38262,
+      "author": "Moses",
+      "genre": "Law",
+      "testament": "OT"
+    },
+    {
+      "number": 2,
+      "name": "Exodus",
+      "chapters": 40,
+      "verses": 1213,
+      "words": 32685,
+      "author": "Moses",
+      "genre": "Law",
+      "testament": "OT"
+    },
+    {
+      "number": 3,
+      "name": "Leviticus",
+      "chapters": 27,
+      "verses": 859,
+      "words": 24541,
+      "author": "Moses",
+      "genre": "Law",
+      "testament": "OT"
+    },
+    {
+      "number": 4,
+      "name": "numbers",
+      "chapters": 36,
+      "verses": 1289,
+      "words": 32896,
+      "author": "Moses",
+      "genre": "Law",
+      "testament": "OT"
+    },
+    {
+      "number": 5,
+      "name": "Deuteronomy",
+      "chapters": 34,
+      "verses": 959,
+      "words": 28352,
+      "author": "Moses",
+      "genre": "Law",
+      "testament": "OT"
+    },
+    {
+      "number": 6,
+      "name": "Joshua",
+      "chapters": 24,
+      "verses": 658,
+      "words": 18854,
+      "author": "Unknown",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 7,
+      "name": "Judges",
+      "chapters": 21,
+      "verses": 618,
+      "words": 18966,
+      "author": "Unknown",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 8,
+      "name": "Ruth",
+      "chapters": 4,
+      "verses": 85,
+      "words": 2574,
+      "author": "Unknown",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 9,
+      "name": "1 Samuel",
+      "chapters": 31,
+      "verses": 810,
+      "words": 25048,
+      "author": "Unknown",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 10,
+      "name": "2 Samuel",
+      "chapters": 24,
+      "verses": 695,
+      "words": 20600,
+      "author": "Unknown",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 11,
+      "name": "1 Kings",
+      "chapters": 22,
+      "verses": 816,
+      "words": 24513,
+      "author": "Unknown",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 12,
+      "name": "2 Kings",
+      "chapters": 25,
+      "verses": 719,
+      "words": 23517,
+      "author": "Unknown",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 13,
+      "name": "1 Chronicles",
+      "chapters": 29,
+      "verses": 942,
+      "words": 20365,
+      "author": "Ezra",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 14,
+      "name": "2 Chronicles",
+      "chapters": 36,
+      "verses": 822,
+      "words": 26069,
+      "author": "Ezra",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 15,
+      "name": "Ezra",
+      "chapters": 10,
+      "verses": 280,
+      "words": 7440,
+      "author": "Ezra",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 16,
+      "name": "Nehemiah",
+      "chapters": 13,
+      "verses": 406,
+      "words": 10480,
+      "author": "Nehemiah",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 17,
+      "name": "Esther",
+      "chapters": 10,
+      "verses": 167,
+      "words": 5633,
+      "author": "Unknown",
+      "genre": "History",
+      "testament": "OT"
+    },
+    {
+      "number": 18,
+      "name": "Job",
+      "chapters": 42,
+      "verses": 1070,
+      "words": 18098,
+      "author": "Unknown",
+      "genre": "Poetry",
+      "testament": "OT"
+    },
+    {
+      "number": 19,
+      "name": "Psalms",
+      "chapters": 150,
+      "verses": 2461,
+      "words": 42704,
+      "author": "Various",
+      "genre": "Poetry",
+      "testament": "OT"
+    },
+    {
+      "number": 20,
+      "name": "Proverbs",
+      "chapters": 31,
+      "verses": 915,
+      "words": 15038,
+      "author": "Solomon",
+      "genre": "Poetry",
+      "testament": "OT"
+    },
+    {
+      "number": 21,
+      "name": "Ecclesiastes",
+      "chapters": 12,
+      "verses": 222,
+      "words": 5579,
+      "author": "Solomon",
+      "genre": "Poetry",
+      "testament": "OT"
+    },
+    {
+      "number": 22,
+      "name": "Song of Solomon",
+      "chapters": 8,
+      "verses": 117,
+      "words": 2658,
+      "author": "Solomon",
+      "genre": "Poetry",
+      "testament": "OT"
+    },
+    {
+      "number": 23,
+      "name": "Isaiah",
+      "chapters": 66,
+      "verses": 1292,
+      "words": 37036,
+      "author": "Isaiah",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 24,
+      "name": "Jeremiah",
+      "chapters": 52,
+      "verses": 1364,
+      "words": 42654,
+      "author": "Jeremiah",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 25,
+      "name": "Lamentations",
+      "chapters": 5,
+      "verses": 154,
+      "words": 3411,
+      "author": "Jeremiah",
+      "genre": "Poetry",
+      "testament": "OT"
+    },
+    {
+      "number": 26,
+      "name": "Ezekiel",
+      "chapters": 48,
+      "verses": 1273,
+      "words": 39401,
+      "author": "Ezekiel",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 27,
+      "name": "Daniel",
+      "chapters": 12,
+      "verses": 357,
+      "words": 11602,
+      "author": "Daniel",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 28,
+      "name": "Hosea",
+      "chapters": 14,
+      "verses": 197,
+      "words": 5174,
+      "author": "Hosea",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 29,
+      "name": "Joel",
+      "chapters": 3,
+      "verses": 73,
+      "words": 2033,
+      "author": "Joel",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 30,
+      "name": "Amos",
+      "chapters": 9,
+      "verses": 146,
+      "words": 4216,
+      "author": "Amos",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 31,
+      "name": "Obadiah",
+      "chapters": 1,
+      "verses": 21,
+      "words": 669,
+      "author": "Obadiah",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 32,
+      "name": "Jonah",
+      "chapters": 4,
+      "verses": 48,
+      "words": 1320,
+      "author": "Jonah",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 33,
+      "name": "Micah",
+      "chapters": 7,
+      "verses": 105,
+      "words": 3152,
+      "author": "Micah",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 34,
+      "name": "Nahum",
+      "chapters": 3,
+      "verses": 47,
+      "words": 1284,
+      "author": "Nahum",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 35,
+      "name": "Habakkuk",
+      "chapters": 3,
+      "verses": 56,
+      "words": 1475,
+      "author": "Habakkuk",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 36,
+      "name": "Zephaniah",
+      "chapters": 3,
+      "verses": 53,
+      "words": 1616,
+      "author": "Zephaniah",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 37,
+      "name": "Haggai",
+      "chapters": 2,
+      "verses": 38,
+      "words": 1130,
+      "author": "Haggai",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 38,
+      "name": "Zechariah",
+      "chapters": 14,
+      "verses": 211,
+      "words": 6443,
+      "author": "Zechariah",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 39,
+      "name": "Malachi",
+      "chapters": 4,
+      "verses": 55,
+      "words": 1781,
+      "author": "Malachi",
+      "genre": "Prophecy",
+      "testament": "OT"
+    },
+    {
+      "number": 40,
+      "name": "Matthew",
+      "chapters": 28,
+      "verses": 1071,
+      "words": 23343,
+      "author": "Matthew",
+      "genre": "Gospel",
+      "testament": "NT"
+    },
+    {
+      "number": 41,
+      "name": "Mark",
+      "chapters": 16,
+      "verses": 678,
+      "words": 14949,
+      "author": "Mark",
+      "genre": "Gospel",
+      "testament": "NT"
+    },
+    {
+      "number": 42,
+      "name": "Luke",
+      "chapters": 24,
+      "verses": 1151,
+      "words": 25640,
+      "author": "Luke",
+      "genre": "Gospel",
+      "testament": "NT"
+    },
+    {
+      "number": 43,
+      "name": "John",
+      "chapters": 21,
+      "verses": 879,
+      "words": 18658,
+      "author": "John",
+      "genre": "Gospel",
+      "testament": "NT"
+    },
+    {
+      "number": 44,
+      "name": "Acts",
+      "chapters": 28,
+      "verses": 1007,
+      "words": 24229,
+      "author": "Luke",
+      "genre": "History",
+      "testament": "NT"
+    },
+    {
+      "number": 45,
+      "name": "Romans",
+      "chapters": 16,
+      "verses": 433,
+      "words": 9422,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 46,
+      "name": "1 Corinthians",
+      "chapters": 16,
+      "verses": 437,
+      "words": 9462,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 47,
+      "name": "2 Corinthians",
+      "chapters": 13,
+      "verses": 257,
+      "words": 6046,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 48,
+      "name": "Galatians",
+      "chapters": 6,
+      "verses": 149,
+      "words": 3084,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 49,
+      "name": "Ephesians",
+      "chapters": 6,
+      "verses": 155,
+      "words": 3022,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 50,
+      "name": "Philippians",
+      "chapters": 4,
+      "verses": 104,
+      "words": 2183,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 51,
+      "name": "Colossians",
+      "chapters": 4,
+      "verses": 95,
+      "words": 1979,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 52,
+      "name": "1 Thessalonians",
+      "chapters": 5,
+      "verses": 89,
+      "words": 1837,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 53,
+      "name": "2 Thessalonians",
+      "chapters": 3,
+      "verses": 47,
+      "words": 1022,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 54,
+      "name": "1 Timothy",
+      "chapters": 6,
+      "verses": 113,
+      "words": 2244,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 55,
+      "name": "2 Timothy",
+      "chapters": 4,
+      "verses": 83,
+      "words": 1666,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 56,
+      "name": "Titus",
+      "chapters": 3,
+      "verses": 46,
+      "words": 896,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 57,
+      "name": "Philemon",
+      "chapters": 1,
+      "verses": 25,
+      "words": 430,
+      "author": "Paul",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 58,
+      "name": "Hebrews",
+      "chapters": 13,
+      "verses": 303,
+      "words": 6897,
+      "author": "Unknown",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 59,
+      "name": "James",
+      "chapters": 5,
+      "verses": 108,
+      "words": 2304,
+      "author": "James",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 60,
+      "name": "1 Peter",
+      "chapters": 5,
+      "verses": 105,
+      "words": 2476,
+      "author": "Peter",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 61,
+      "name": "2 Peter",
+      "chapters": 3,
+      "verses": 61,
+      "words": 1553,
+      "author": "Peter",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 62,
+      "name": "1 John",
+      "chapters": 5,
+      "verses": 105,
+      "words": 2517,
+      "author": "John",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 63,
+      "name": "2 John",
+      "chapters": 1,
+      "verses": 13,
+      "words": 298,
+      "author": "John",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 64,
+      "name": "3 John",
+      "chapters": 1,
+      "verses": 14,
+      "words": 294,
+      "author": "John",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 65,
+      "name": "Jude",
+      "chapters": 1,
+      "verses": 25,
+      "words": 608,
+      "author": "Jude",
+      "genre": "Letter",
+      "testament": "NT"
+    },
+    {
+      "number": 66,
+      "name": "Revelation",
+      "chapters": 22,
+      "verses": 404,
+      "words": 11952,
+      "author": "John",
+      "genre": "Prophecy",
+      "testament": "NT"
     }
    ]

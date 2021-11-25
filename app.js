@@ -11,6 +11,7 @@ app.set("view engine", "ejs");
 const { PORT, MONGODB_URI } = process.env;
 
 const userController = require("./controllers/user");
+const recordController = require("./controllers/record");
 
 
 //Connect to DB
@@ -68,9 +69,7 @@ app.get("/stats", authMiddleware, (req, res) => {
     res.render("stats");
 });
 
-app.get("/record", authMiddleware, (req, res) => {
-    res.render("record");
-});
+app.get("/record", authMiddleware, recordController.list);
 
 app.get("/login", (req, res) => {
     var reqMessage = req.query.message;
