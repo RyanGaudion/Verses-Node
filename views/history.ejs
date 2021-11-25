@@ -32,13 +32,9 @@
                 </form>
             </div>
 
-            <%- include('common/historyCard'); -%>
-            <%- include('common/historyCard'); -%>
-            <%- include('common/historyCard'); -%>
-            <%- include('common/historyCard'); -%>
-            <%- include('common/historyCard'); -%>
-            <%- include('common/historyCard'); -%>
-            <%- include('common/historyCard'); -%>
+            <% records.forEach(function(record){ %>
+                <%- include('common/historyCard', {data: record}); -%>
+            <% }); %>
         </div>
     </div>
 </body>

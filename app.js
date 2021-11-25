@@ -12,6 +12,7 @@ const { PORT, MONGODB_URI } = process.env;
 
 const userController = require("./controllers/user");
 const recordController = require("./controllers/record");
+const bookController = require("./controllers/book");
 
 
 //Connect to DB
@@ -61,15 +62,14 @@ app.get("/", authMiddleware, (req, res) => {
     res.render("index");
 });
 
-app.get("/history", authMiddleware, (req, res) => {
-    res.render("history");
-});
+app.get("/history", authMiddleware, recordController.listByUser);
 
 app.get("/stats", authMiddleware, (req, res) => {
     res.render("stats");
 });
 
-app.get("/record", authMiddleware, recordController.list);
+app.get("/record", authMiddleware, bookController.smallList);
+app.post("/createRecord", authMiddleware, recordController.create);
 
 app.get("/login", (req, res) => {
     var reqMessage = req.query.message;
