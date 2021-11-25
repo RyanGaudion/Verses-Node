@@ -23,3 +23,5 @@ Controller:
 
 - Review & Notes of Books??
 
+
+Books of the bible - https://holyword.church/miscellaneous-resources/how-many-words-in-each-book-of-the-bible/

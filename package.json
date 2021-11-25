@@ -8,10 +8,12 @@
     "autoprefixer": "^10.4.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "loading-cli": "^1.1.0",
     "mongoose": "^6.0.13",
     "postcss": "^8.3.11",
     "tailwindcss": "^2.2.17"
@@ -24,7 +26,9 @@
     "build-css": "tailwindcss build -i private/style.css -o public/css/style.css",
     "build-css-prod": "tailwindcss build -i private/style.css -o public/css/style.css --jit --purge \"./**/*.ejs\" \"./**/*.html\"",
     "dev-purge": "nodemon -e js,ejs,json,html --exec \"npm run build-css-prod && node app.js\"",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "seedProduction": "cross-env NODE_ENV=production node seeder.js",
+    "seed": "node seeder.js"
   },
   "repository": {
     "type": "git",
