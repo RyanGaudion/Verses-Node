@@ -6,16 +6,20 @@ const { isValidObjectId } = require('mongoose');
 exports.search = async(req, res) => {
     try{
        const user = await User.findById(req.session.userID);
-       const search = req.query.search;
+       const searchQuery = req.query.search;
        var records;
-       if(search){
-        records = await Record.find({user_id: user._id, book: {$regex : "(?i)^" + search}})
+       if(searchQuery){
+        records =  await Record.find(
+            { user_id: user._id, $text: { $search: searchQuery}},
+            { score: { $meta: "textScore" } }
+         ).sort({date: 'desc'});
+        
        }
        else{
-        records = await Record.find({user_id: user._id})
+        records = await Record.find({user_id: user._id}).sort({date: 'desc'});
        }
    
-       res.render("history", {records: records, query: search});
+       res.render("history", {records: records, query: searchQuery});
     }
     catch(e){
        console.log(e);
@@ -40,6 +44,7 @@ exports.create = async(req, res) => {
         await Record.create({
             date: req.body.date,
             book: req.body.book,
+            notes: req.body.notes,
             user_id: user._id,
             chapters: chapterArr
         });
