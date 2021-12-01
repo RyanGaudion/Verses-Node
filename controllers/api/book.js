@@ -1,9 +1,9 @@
-const Book = require('../models/Book');
+const Book = require('../../models/Book');
 
-exports.smallList = async(req, res) =>{
+exports.list = async(req, res) =>{
     try{
         const books = await Book.find({}, 'name chapters');
-        res.render("record", {books: books});
+        res.json(books);
     }catch(e){
         res.status(404).send({message: "could not list books"});
     }

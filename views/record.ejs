@@ -5,6 +5,37 @@
     <%- include('common/head'); -%>
     <title>Create Update Record</title>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <script>
+      /* 
+  Alpine Dev Tools: https://github.com/Te7a-Houdini/alpinejs-devtools
+*/
+function bookData() {
+  return {
+    selectedBookName: '',
+    selectedStart: '',
+    counter: 1,
+    get currentItem(){
+      var result =  typeof this.selectedBookName !== 'undefined' ? this.books.filter(i => i.name == this.selectedBookName)[0] : {chapters: 0};
+      return typeof result !== 'undefined' ? result : {chapters: 0};
+    },
+
+    //How many numebrs to display in end chapter loop
+    get selectedStartNumber(){
+      return Number(typeof this.selectedStart !== 'undefined' ? this.selectedStart  : 0);
+    },
+    get selectedEndCount(){
+      return this.currentItem.chapters - (this.selectedStartNumber - 1) ;
+    },
+    books: [],
+    init() {
+      // Testdata, in case I hit my 60 calls per hour
+      fetch('/api/book/getall')
+        .then(response => response.json())
+        .then(response => { this.books = response});
+    }
+  };
+}
+    </script>
 </head>
 
 <body>
@@ -24,30 +55,25 @@
                     <%- include('common/dateTimePicker.ejs'); -%>
 
                       <!--Book Component-->
-                        <div x-data="{ 
-                            selectedBookName: '',
-                            selectedStart: 1,
-
-                            books:<%= JSON.stringify(books); %>,
-                            get currentItem(){
-                                return this.books.filter(i => i.name == this.selectedBookName)[0]
-                            }
-                        }" class="rounded-md shadow-sm space-y-2">
+                        <div
+                          x-data="bookData()" 
+                          x-init="init()"
+                          class="rounded-md shadow-sm space-y-2">
 
                             <!-- Book Selection -->
                             <label for="book" class="sr-only">Book</label>
                             <select id="book" name="book" x-model="selectedBookName" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300  text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
-                                <option x-bind:disabled="typeof currentItem !== 'undefined' ? '' : 'disabled'" selected value> -- Select a book -- </option>
+                                <option x-bind:disabled="currentItem.chapters > 0" selected value> -- Select a book -- </option>
                                 <template x-for="book in books" :key="book">
                                     <option x-text="book.name"></option>
                                 </template>
                             </select>
-                
-                            <!-- Chapter from-->
+
+                            <!--Chapter from-->
                             <label for="startchapter" class="sr-only">Start Chapter</label>
                             <select id="startchapter" name="startchapter" x-model="selectedStart" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
-                                <option x-bind:disabled="typeof currentItem !== 'undefined' ? '' : 'disabled'" selected value> -- Select a Start Chapter -- </option>
-                                <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.chapters : 0)">
+                                <option x-bind:disabled="currentItem.chapters > 1" selected value> -- Select a Start Chapter -- </option>
+                                <template x-for="i in currentItem.chapters">
                                     <option x-text="i"></option>
                                 </template>
                             </select>
@@ -55,9 +81,9 @@
                             <!-- Chapter to-->
                             <label for="endchapter" class="sr-only">End Chapter</label>
                             <select id="endchapter" name="endchapter" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
-                                <option disabled selected value> -- Select an end chapter -- </option>
-                                <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.chapters - (typeof selectedStart !== 'undefined' ? (selectedStart - 1) : 0): 0)">
-                                    <option x-text="i + (typeof selectedStart !== 'undefined' ? (+selectedStart - 1)  : 0)"></option>
+                                <option x-bind:disabled="currentItem.chapters > 1" selected value> -- Select an end chapter -- </option>
+                                <template x-for="i in selectedEndCount">
+                                    <option x-text="i + (selectedStartNumber - 1)"></option>
                                 </template>
                             </select>
                         </div>
