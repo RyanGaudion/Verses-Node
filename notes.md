@@ -55,3 +55,21 @@ How much this month:
   select * from records where user count chapters.size
 
 ToDo: Create a table of all books & how much is complete??
+
+
+December ToDo:
+- **Record Page**
+  - Change View & Edit Record to Single button
+  - Add edit record functionality
+  - Add delete record functionality (popup)
+  - Add ability to bookmark records
+
+- **bookmarks** (future)
+  - Show page of just records & their notes 
+
+- **Stats**
+  - Get stats page working
+  - Add stats graph
+
+- **Dashboard**
+  - Change stats page to dashboard
