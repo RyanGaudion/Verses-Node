@@ -5,21 +5,32 @@ const { isValidObjectId } = require('mongoose');
 
 exports.search = async(req, res) => {
     try{
-       const user = await User.findById(req.session.userID);
-       const searchQuery = req.query.search;
-       var records;
-       if(searchQuery){
-        records =  await Record.find(
-            { user_id: user._id, $text: { $search: searchQuery}},
-            { score: { $meta: "textScore" } }
-         ).sort({date: 'desc'});
+        const user = await User.findById(req.session.userID);
+        const searchQuery = req.query.search;
+        const limit = parseInt(req.query.limit) || 10; // Make sure to parse the limit to number
+        const page = parseInt(req.query.page) || 1;
+
+        var records;
+        var count;
+        if(searchQuery){
+         records =  await Record.find(
+             { user_id: user._id, $text: { $search: searchQuery}},
+             { score: { $meta: "textScore" } }
+          ).skip((limit * page) - limit).limit(limit)
+          .sort({date: 'desc'});
+
+          count = await Record.countDocuments({ user_id: user._id, $text: { $search: searchQuery}});
         
-       }
-       else{
-        records = await Record.find({user_id: user._id}).sort({date: 'desc'});
-       }
+        }
+        else{
+            records = await Record.find({user_id: user._id})
+            .skip((limit * page) - limit).limit(limit)
+            .sort({date: 'desc'});
+
+            count = await Record.countDocuments({user_id: user._id});
+        }
    
-       res.render("history", {records: records, query: searchQuery});
+        res.render("history", {records: records, query: searchQuery, count: count, page: page, limit: limit});
     }
     catch(e){
        console.log(e);

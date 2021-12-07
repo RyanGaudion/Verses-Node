@@ -26,10 +26,6 @@ mongoose.connection.on("error", (err) => {
   process.exit();
 });
 
-
-
-
-
 //Add Req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
