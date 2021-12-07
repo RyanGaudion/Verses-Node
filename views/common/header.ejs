@@ -13,12 +13,19 @@
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <!--Current Menu Item-->
-                                <a href="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                                
+                                <a href="/" class="px-3 py-2 rounded-md text-sm font-medium
+                                    <%- _pageName == 'index' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %>
+                                ">Dashboard</a>
                                 
                                 <!--Non Current Menu Item-->
-                                <a href="/stats" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stats</a> 
+                                <a href="/stats" class="px-3 py-2 rounded-md text-sm font-medium focus-within
+                                    <%- _pageName == 'stats' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %>
+                                ">Stats</a> 
 
-                                <a href="/history" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">History</a> 
+                                <a href="/history" class="px-3 py-2 rounded-md text-sm font-medium 
+                                    <%- _pageName == 'history' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' %>
+                                ">History</a> 
                             </div>
                         </div>
                     </div>

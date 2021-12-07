@@ -5,7 +5,7 @@ exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
-            res.render('login', { errors: { message: 'Email not found' }, message: null })
+            res.render('login', { _pageName: "login", errors: { message: 'Email not found' }, message: null })
             return;
         }
 
@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
             return
         }
 
-        res.render('login', { errors: { message: 'Incorrect Password' }, message: null })
+        res.render('login', { _pageName: "login", errors: { message: 'Incorrect Password' }, message: null })
 
 
     } catch (e) {
@@ -38,18 +38,18 @@ exports.register = async (req, res) => {
         }
         else{
             console.log("Passwords don't match");
-            res.render('register', { errors: { message: "passwords don't match" }});
+            res.render('register', { _pageName: "register", errors: { message: "passwords don't match" }});
         }
     } catch (e) {
         console.log("error: ---")
         console.log(e);
         if (e.error || e.errors) {
             console.log("mongoose error");
-            res.render('register', { errors: e.error || e.errors || e.MongoError})
+            res.render('register', { _pageName: "register", errors: e.error || e.errors || e.MongoError})
             return;
         }
         else if((e.name==='MongoError' || e.name ==='MongoServerError') && e.code === 11000 ){
-            res.render('register', { errors: {message: "Duplicate Email Error"}})
+            res.render('register', { _pageName: "register", errors: {message: "Duplicate Email Error"}})
             return;
         }
         return res.status(400).send({

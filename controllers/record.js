@@ -30,7 +30,7 @@ exports.search = async(req, res) => {
             count = await Record.countDocuments({user_id: user._id});
         }
    
-        res.render("history", {records: records, query: searchQuery, count: count, page: page, limit: limit});
+        res.render("history", {_pageName: "history", records: records, query: searchQuery, count: count, page: page, limit: limit});
     }
     catch(e){
        console.log(e);
@@ -120,7 +120,7 @@ exports.record = async(req, res) => {
             const record = await Record.findById(recordId);
     
             if(record && record.user_id.toString() == user._id.toString()){
-                res.render("record", {record: record});
+                res.render("record", {_pageName: "record", record: record});
             }
             else{
                 console.log("Record was null or user did not match");
@@ -128,7 +128,7 @@ exports.record = async(req, res) => {
             }
         }
         else{
-            res.render("record", {record: {}});
+            res.render("record", {_pageName: "record", record: {}});
         }
     }
     catch(e){
