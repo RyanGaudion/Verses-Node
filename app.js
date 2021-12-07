@@ -74,6 +74,7 @@ app.get("/record", authMiddleware, (req, res) => {
 
 
 app.post("/createRecord", authMiddleware, recordController.create);
+app.post("/deleteRecord", authMiddleware, recordController.delete);
 
 app.get("/login", (req, res) => {
     var reqMessage = req.query.message;

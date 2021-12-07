@@ -75,3 +75,7 @@ December ToDo:
 - **Dashboard**
   - Change stats page to dashboard
   - Make just a list of buttons (my records, my stats, add records) ...
+
+
+- **Improvements**
+  - Make record deletes done with Ajax   

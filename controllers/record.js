@@ -56,3 +56,31 @@ exports.create = async(req, res) => {
         res.status(404).send({message: "could not add record"});
     }
 };
+
+exports.delete = async(req, res) => {
+    try{
+        const user = await User.findById(req.session.userID);
+        
+
+        const recordId = req.body.recordId;
+        console.log("Record Id: " + recordId);
+        console.log("User Id: " + req.session.userID);
+
+        const record = await Record.findById(recordId);
+        console.log(record.user_id);
+        console.log(user._id);
+
+        if(record && record.user_id.toString() == user._id.toString()){
+            await Record.findByIdAndDelete(recordId);
+        }
+        else{
+            console.log("Record was null or user did not match");
+        }
+
+        res.redirect("/history");
+    }
+    catch(e){
+        console.log(e);
+        res.status(404).send({message: "could not delete record"});
+    }
+};
