@@ -30,17 +30,6 @@ function bookData(inputRecord) {
           this.selectedBookName = this.currentRecord.book;
           this.selectedStart = this.currentRecord.chapters[0];
           this.selectedEnd = this.currentRecord.chapters[this.currentRecord.chapters.length -1];
-          /*
-          let endElement = document.getElementById("endchapter");
-          endElement.value = record.chapters[record.chapters.length-1];
-      
-          let notesElement = document.getElementById("notes");
-          notesElement.value = record.notes;
-      
-          let dateElement = document.getElementById("datepickerValue");
-          dateElement.value = record.date;
-      
-          console.log(record.date);*/
         }
       }
     };
