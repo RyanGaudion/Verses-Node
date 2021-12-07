@@ -26,10 +26,6 @@ mongoose.connection.on("error", (err) => {
   process.exit();
 });
 
-
-
-
-
 //Add Req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -59,13 +55,13 @@ const authMiddleware = async (req, res, next) => {
 }
 
 app.get("/", authMiddleware, (req, res) => {
-    res.render("index");
+    res.render("index", {_pageName: "index"});
 });
 
 app.get("/history", authMiddleware, recordController.search);
 
 app.get("/stats", authMiddleware, (req, res) => {
-    res.render("stats");
+    res.render("stats", {_pageName: "stats"});
 });
 
 app.get("/record", authMiddleware, recordController.record);
@@ -76,17 +72,17 @@ app.post("/deleteRecord", authMiddleware, recordController.delete);
 app.get("/login", (req, res) => {
     var reqMessage = req.query.message;
     if(reqMessage){
-        res.render("login", { errors: {}, message: reqMessage });
+        res.render("login", { _pageName: "login", errors: {}, message: reqMessage });
     }
     else{
-        res.render("login", { errors: {}, message: null });
+        res.render("login", { _pageName: "login", errors: {}, message: null });
     }
 
 })
 app.post("/login", userController.login);
 
 app.get("/register", (req, res) => {
-    res.render("register", { errors: {} });
+    res.render("register", { _pageName: "register", errors: {} });
 })
 app.post("/register", userController.register);
 
