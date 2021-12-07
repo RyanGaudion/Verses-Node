@@ -12,7 +12,7 @@ const { PORT, MONGODB_URI } = process.env;
 
 const userController = require("./controllers/user");
 const recordController = require("./controllers/record");
-const bookController = require("./controllers/book");
+const bookApiController = require("./controllers/api/book");
 
 
 //Connect to DB
@@ -68,8 +68,10 @@ app.get("/stats", authMiddleware, (req, res) => {
     res.render("stats");
 });
 
-app.get("/record", authMiddleware, bookController.smallList);
+app.get("/record", authMiddleware, recordController.record);
+
 app.post("/createRecord", authMiddleware, recordController.create);
+app.post("/deleteRecord", authMiddleware, recordController.delete);
 
 app.get("/login", (req, res) => {
     var reqMessage = req.query.message;
@@ -94,7 +96,8 @@ app.get("/logout", async (req, res) => {
     res.redirect('/login');
 });
 
-
+//API endpoints
+app.get("/api/book/getall", bookApiController.list);
 
 app.listen(PORT, () => {
     console.log(`Verses app listening at http://localhost:${PORT}`);

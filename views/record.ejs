@@ -4,14 +4,17 @@
 <head>
     <%- include('common/head'); -%>
     <title>Create Update Record</title>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <script src="https://unpkg.com/alpinejs@3.7.0/dist/cdn.min.js" defer></script>
+    <script src="/js/record.js"></script>
 </head>
 
 <body>
     <div class="min-h-full">
         <%- include('common/header'); -%>
         <!--Container-->
-        <div class="px-4 md:container py-8 md:py-14 space-y-6 md:space-y-10">          
+        <div class="px-4 md:container py-8 md:py-14 space-y-6 md:space-y-10">       
+            
+             
             <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-md w-full space-y-8">
                   <div>
@@ -21,46 +24,50 @@
                   </div>
                   <form class="mt-8 space-y-6" action="/createRecord" method="POST">
 
-                    <%- include('common/dateTimePicker.ejs'); -%>
+                    <%- include('common/dateTimePicker.ejs', {data: record.date}); -%>
 
+                    <input type="hidden" name="recordId" id="recordId" value="<%= record._id %>"/>
                       <!--Book Component-->
-                        <div x-data="{ 
-                            selectedBookName: '',
-                            selectedStart: '',
-
-                            books:<%= JSON.stringify(books); %>,
-                            get currentItem(){
-                                return this.books.filter(i => i.name == this.selectedBookName)[0]
-                            }
-                        }" class="rounded-md shadow-sm space-y-2">
+                        <div
+                          x-data="bookData(<%= JSON.stringify(record) %>)" 
+                          x-init="init()"
+                          class="rounded-md shadow-sm space-y-2">
 
                             <!-- Book Selection -->
                             <label for="book" class="sr-only">Book</label>
                             <select id="book" name="book" x-model="selectedBookName" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300  text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
-                                <option x-bind:disabled="typeof currentItem !== 'undefined' ? '' : 'disabled'" selected value> -- Select a book -- </option>
+                                <option x-bind:disabled="currentItem.chapters > 0" selected value> -- Select a book -- </option>
                                 <template x-for="book in books" :key="book">
                                     <option x-text="book.name"></option>
                                 </template>
                             </select>
-                
-                            <!-- Chapter from-->
+
+                            <!--Chapter from-->
                             <label for="startchapter" class="sr-only">Start Chapter</label>
                             <select id="startchapter" name="startchapter" x-model="selectedStart" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
-                                <option x-bind:disabled="typeof currentItem !== 'undefined' ? '' : 'disabled'" selected value> -- Select a Start Chapter -- </option>
-                                <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.chapters : 0)">
+                                <option x-bind:disabled="currentItem.chapters > 1" selected value> -- Select a Start Chapter -- </option>
+                                <template x-for="i in currentItem.chapters">
                                     <option x-text="i"></option>
                                 </template>
                             </select>
                 
                             <!-- Chapter to-->
                             <label for="endchapter" class="sr-only">End Chapter</label>
-                            <select id="endchapter" name="endchapter" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
-                                <option disabled selected value> -- Select an end chapter -- </option>
-                                <template x-for="i in (typeof currentItem !== 'undefined' ? currentItem.chapters - (typeof selectedStart !== 'undefined' ? (selectedStart - 1) : 0): 0)">
-                                    <option x-text="i + (typeof selectedStart !== 'undefined' ? (+selectedStart - 1)  : 0)"></option>
+                            <select id="endchapter" name="endchapter" x-model="selectedEnd" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                                <option x-bind:disabled="currentItem.chapters > 1" selected value> -- Select an end chapter -- </option>
+                                <template x-for="i in selectedEndCount">
+                                    <option x-text="i + (selectedStartNumber - 1)"></option>
                                 </template>
                             </select>
                         </div>
+
+                    <!-- Notes-->
+                    <label for="notes" class="sr-only">Notes</label>
+                    <textarea id="notes" name="notes"
+                      class="form-textarea mt-1 block w-full appearance-none relative px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                      rows="5"
+                      placeholder="Enter notes about what you've read."
+                    ><%= record.notes %></textarea>
               
                     <div>
                       <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

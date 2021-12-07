@@ -9,9 +9,12 @@ const recordSchema = new Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
         },
-        chapters: [{type: Number}]
+        chapters: [{type: Number}],
+        notes: {type: String}
     },
     { timestamps: true }
 );
+
+recordSchema.index({'$**': 'text'});
 
 module.exports = mongoose.model("Record", recordSchema);
