@@ -35,6 +35,8 @@ exports.create = async(req, res) => {
         const startChapter = Number(req.body.startchapter);
         const endChapter = Number(req.body.endchapter);
 
+        const recordId = req.body.recordId;
+
         chapterArr = [];
         for(let i=startChapter; i<endChapter + 1; i++)
         {
@@ -42,13 +44,26 @@ exports.create = async(req, res) => {
         }
         console.log(chapterArr);
 
-        await Record.create({
-            date: req.body.date,
-            book: req.body.book,
-            notes: req.body.notes,
-            user_id: user._id,
-            chapters: chapterArr
-        });
+        console.log(req.body.date);
+        if(recordId){
+            const updatedRecord = {
+                date: req.body.date,
+                book: req.body.book,
+                notes: req.body.notes,
+                chapters: chapterArr
+            }
+            //var record = await Record.findById(recordId);
+            const record = await Record.updateOne({ _id: recordId }, updatedRecord);
+        }
+        else{
+            await Record.create({
+                date: req.body.date,
+                book: req.body.book,
+                notes: req.body.notes,
+                user_id: user._id,
+                chapters: chapterArr
+            });
+        }
 
         res.redirect("/history");
     }
