@@ -1,8 +1,10 @@
-function bookData() {
+function bookData(inputRecord) {
     return {
       selectedBookName: '',
       selectedStart: '',
+      selectedEnd: '',
       counter: 1,
+      currentRecord: inputRecord,
       get currentItem(){
         var result =  typeof this.selectedBookName !== 'undefined' ? this.books.filter(i => i.name == this.selectedBookName)[0] : {chapters: 0};
         return typeof result !== 'undefined' ? result : {chapters: 0};
@@ -20,7 +22,26 @@ function bookData() {
         // Testdata, in case I hit my 60 calls per hour
         fetch('/api/book/getall')
           .then(response => response.json())
-          .then(response => { this.books = response});
+          .then(response => { this.books = response})
+          .then(() => this.defaultValue());
+      },
+      defaultValue(){
+        if(this.currentRecord){
+          this.selectedBookName = this.currentRecord.book;
+          this.selectedStart = this.currentRecord.chapters[0];
+          this.selectedEnd = this.currentRecord.chapters[this.currentRecord.chapters.length -1];
+          /*
+          let endElement = document.getElementById("endchapter");
+          endElement.value = record.chapters[record.chapters.length-1];
+      
+          let notesElement = document.getElementById("notes");
+          notesElement.value = record.notes;
+      
+          let dateElement = document.getElementById("datepickerValue");
+          dateElement.value = record.date;
+      
+          console.log(record.date);*/
+        }
       }
     };
   }

@@ -28,7 +28,7 @@ const MONTH_SHORT_NAMES = [
 ];
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function dateTimeApp() {
+function dateTimeApp(data) {
     return {
         showDatepicker: false,
         datepickerValue: "",
@@ -40,7 +40,10 @@ function dateTimeApp() {
         blankdays: [],
         initDate() {
             let today;
-            if (this.selectedDate) {
+            if(data){
+                today = new Date(Date.parse(data));
+            }
+            else if (this.selectedDate) {
                 today = new Date(Date.parse(this.selectedDate));
             } else {
                 today = new Date();

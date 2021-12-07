@@ -84,3 +84,23 @@ exports.delete = async(req, res) => {
         res.status(404).send({message: "could not delete record"});
     }
 };
+
+exports.edit = async(req, res) => {
+    try{
+        const user = await User.findById(req.session.userID);
+        const recordId = req.query.recordId;
+        const record = await Record.findById(recordId);
+
+        if(record && record.user_id.toString() == user._id.toString()){
+            res.render("record", {record: record});
+        }
+        else{
+            console.log("Record was null or user did not match");
+            res.redirect("/history");
+        }
+    }
+    catch(e){
+        console.log(e);
+        res.status(404).send({message: "could not edit record"});
+    }
+};

@@ -1,8 +1,8 @@
-<div x-data="dateTimeApp()" x-init="[initDate(), getNoOfDays()]" x-cloak>
+<div x-data="dateTimeApp(<%= JSON.stringify(data) %>)" x-init="[initDate(), getNoOfDays()]" x-cloak>
     <script src="/js/dateTimePicker.js"></script>
     <label for="datepicker" class="sr-only">Select Date</label>
     <div class="relative">
-        <input type="hidden" name="date" x-ref="date" :value="datepickerValue" />
+        <input id="datepickerValue" type="hidden" name="date" x-ref="date" :value="datepickerValue" />
         <input type="text" x-on:click="showDatepicker = !showDatepicker"
             x-model="datepickerValue" x-on:keydown.escape="showDatepicker = false"
             class="appearance-none relative block w-full px-3 py-2 border border-gray-300  text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
