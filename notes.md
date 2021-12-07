@@ -63,6 +63,7 @@ December ToDo:
   - Add edit record functionality
   - Add delete record functionality (popup)
   - Add ability to bookmark records
+  - Add Pagination
 
 - **bookmarks** (future)
   - Show page of just records & their notes 
@@ -73,3 +74,4 @@ December ToDo:
 
 - **Dashboard**
   - Change stats page to dashboard
+  - Make just a list of buttons (my records, my stats, add records) ...
