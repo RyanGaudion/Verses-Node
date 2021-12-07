@@ -26,6 +26,7 @@
 
                     <%- include('common/dateTimePicker.ejs', {data: record.date}); -%>
 
+                    <input type="hidden" name="recordId" id="recordId" value="<%= record._id %>"/>
                       <!--Book Component-->
                         <div
                           x-data="bookData(<%= JSON.stringify(record) %>)" 

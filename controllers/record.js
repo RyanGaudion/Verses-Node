@@ -27,6 +27,7 @@ exports.search = async(req, res) => {
     }
 };
 
+//Create or update
 exports.create = async(req, res) => {
     try{
         const user = await User.findById(req.session.userID);
@@ -85,18 +86,23 @@ exports.delete = async(req, res) => {
     }
 };
 
-exports.edit = async(req, res) => {
+exports.record = async(req, res) => {
     try{
-        const user = await User.findById(req.session.userID);
-        const recordId = req.query.recordId;
-        const record = await Record.findById(recordId);
-
-        if(record && record.user_id.toString() == user._id.toString()){
-            res.render("record", {record: record});
+        if(req.query.recordId){
+            const user = await User.findById(req.session.userID);
+            const recordId = req.query.recordId;
+            const record = await Record.findById(recordId);
+    
+            if(record && record.user_id.toString() == user._id.toString()){
+                res.render("record", {record: record});
+            }
+            else{
+                console.log("Record was null or user did not match");
+                res.redirect("/history");
+            }
         }
         else{
-            console.log("Record was null or user did not match");
-            res.redirect("/history");
+            res.render("record", {record: {}});
         }
     }
     catch(e){
