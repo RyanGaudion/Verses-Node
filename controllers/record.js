@@ -141,65 +141,11 @@ exports.stats = async (req, res) => {
     try {
         const user = await User.findById(req.session.userID);
 
-        let TODAY = new Date();
-        var YEAR_BEFORE = new Date()
-        YEAR_BEFORE.setFullYear(YEAR_BEFORE.getFullYear()-1);
 
-        console.log(TODAY);
-        console.log(YEAR_BEFORE);
-        console.log(user._id);
+        monthCountStat = await getMonthChapterStat(user);
+        console.log(monthCountStat);
 
-        const monthsArray = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
-
-        //https://coderedirect.com/questions/243271/group-records-by-month-and-count-them-mongoose-nodejs-mongodb
-        var monthCountArray = await Record.aggregate( [
-        { 
-            $match: { 
-                user_id: user._id, 
-                createdAt: { $gte: YEAR_BEFORE, $lte: TODAY }
-            }
-        },
-        
-        { 
-            $group: {
-                _id: { "year_month": { $substrCP: [ "$createdAt", 0, 7 ] } }, 
-                count: { $sum: { $size: "$chapters"} }
-            } 
-        },
-        {
-            $sort: { "_id.year_month": 1 }
-        },
-        { 
-            $project: { 
-                _id: 0, 
-                count: 1, 
-                month_year: { 
-                    $concat: [ 
-                        { $arrayElemAt: [ monthsArray, { $subtract: [ { $toInt: { $substrCP: [ "$_id.year_month", 5, 2 ] } }, 1 ] } ] },
-                        " (", 
-                        { $substrCP: [ "$_id.year_month", 0, 4 ] },
-                        ")"
-                    ] 
-                }
-            } 
-        },
-        { 
-            $group: { 
-                _id: null, 
-                data: { $push: { k: "$month_year", v: "$count" } }
-            } 
-        },
-        {
-            $project: { 
-                data: { $arrayToObject: "$data" }, 
-                _id: 0 
-            } 
-        }]);
-        
-        console.log("array");
-        console.log(monthCountArray);
-
-        res.render('stats', {_pageName: "stats", monthCount: monthCountArray});
+        res.render('stats', {_pageName: "stats", monthCount: monthCountStat});
 
     } catch (e) {
         console.log("Error");
@@ -208,4 +154,83 @@ exports.stats = async (req, res) => {
             message: JSON.parse(e),
         });
     }
+}
+
+async function getMonthChapterStat(user){
+    let TODAY = new Date();
+    var YEAR_BEFORE = new Date()
+    YEAR_BEFORE.setFullYear(YEAR_BEFORE.getFullYear()-1);
+
+    const monthsArray = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
+
+    //https://coderedirect.com/questions/243271/group-records-by-month-and-count-them-mongoose-nodejs-mongodb
+    var monthCountArray = await Record.aggregate( [
+    { 
+        $match: { 
+            user_id: user._id, 
+            date: { $gte: YEAR_BEFORE, $lte: TODAY }
+        }
+    },
+    
+    { 
+        $group: {
+            _id: { "year_month": { $substrCP: [ "$date", 0, 7 ] } }, 
+            count: { $sum: { $size: "$chapters"} }
+        } 
+    },
+    {
+        $sort: { "_id.year_month": 1 }
+    },
+    { 
+        $project: { 
+            _id: 0, 
+            count: 1, 
+            month_year: { 
+                $concat: [ 
+                    { $arrayElemAt: [ monthsArray, { $subtract: [ { $toInt: { $substrCP: [ "$_id.year_month", 5, 2 ] } }, 1 ] } ] }
+                    //,
+                    //" (", 
+                    //{ $substrCP: [ "$_id.year_month", 0, 4 ] },
+                    //")"
+                ] 
+            }
+        } 
+    },
+    { 
+        $group: { 
+            _id: null, 
+            data: { $push: { k: "$month_year", v: "$count" } }
+        } 
+    },
+    {
+        $project: { 
+            data: { $arrayToObject: "$data" }, 
+            _id: 0 
+        } 
+    }]);
+    
+    var result = []
+    if(monthCountArray[0] != null && monthCountArray[0].data != null && Object.keys(monthCountArray[0].data).length > 0){
+        //Loop Every month
+        for (let i = 0; i < monthsArray.length; i++) {
+            var monthToCheck = monthsArray[i];
+            var found = false;
+            //Check to see if month is in aggregation result
+            Object.keys(monthCountArray[0].data).forEach(function(monthData){
+                if(monthData.includes(monthToCheck)){
+                    found = true;
+                }
+            })
+
+            //If month in list
+            if(found){
+                result.push({month: monthToCheck, count: monthCountArray[0].data[monthToCheck]});
+            }
+            //If month is not in list
+            else{
+                result.push({month: monthToCheck, count: 0});
+            }
+        }
+    }
+    return result;
 }

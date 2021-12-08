@@ -4,8 +4,8 @@ function yearGraphApp(inputData) {
       get maxValue(){
           return Math.max.apply(Math, this.chartData);
       },
-      chartData: Object.values(inputData[0].data),
-      labels: Object.keys(inputData[0].data),
+      chartData: inputData.map(a => a.count),
+      labels: inputData.map(a => a.month.substring(0,3)),
 
       tooltipContent: '',
       tooltipOpen: false,
