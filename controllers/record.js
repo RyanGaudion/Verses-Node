@@ -2,6 +2,8 @@ const User = require('../models/User');
 const Record = require('../models/Record');
 const { isValidObjectId } = require('mongoose');
 
+const monthsArray = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
+
 
 exports.search = async(req, res) => {
     try{
@@ -143,9 +145,20 @@ exports.stats = async (req, res) => {
 
 
         monthCountStat = await getMonthChapterStat(user);
-        console.log(monthCountStat);
+        testamentStat = await getTestamentChapterStat(user);
+        last30days = await getLastXdays(user, 30);
 
-        res.render('stats', {_pageName: "stats", monthCount: monthCountStat});
+        oldTestamentCount = (testamentStat.find(x => x._id === "OT") === undefined) ? 0 : testamentStat.find(x => x._id === "OT").chapters;
+        newTestamentCount = (testamentStat.find(x => x._id === "NT") === undefined) ? 0 : testamentStat.find(x => x._id === "NT").chapters;
+        biblePercentage = Math.round( ((+oldTestamentCount + +newTestamentCount) * 100 / 1189) * 100) / 100
+
+        res.render('stats', {_pageName: "stats", 
+            monthCount: monthCountStat, 
+            oldTestamentCount: oldTestamentCount, 
+            newTestamentCount: newTestamentCount, 
+            biblePercentage: biblePercentage,
+            lastThirtyDays: (last30days[0] === undefined) ? 0 : last30days[0].count || 0
+        });
 
     } catch (e) {
         console.log("Error");
@@ -156,12 +169,97 @@ exports.stats = async (req, res) => {
     }
 }
 
+async function getTestamentChapterStat(user){
+    var testamentCountArray = await Record.aggregate( [
+        {
+            $match : {
+                user_id: user._id
+            }
+        },
+        {
+            $lookup : {
+                from: 'books',
+                localField: 'book',
+                foreignField: 'name',
+                as: 'book'
+            }
+        },
+        {
+            $project : {
+                book: { $arrayElemAt: ["$book", 0] },
+                chapters: "$chapters"
+            }
+        },
+        {
+            $group : {
+                _id: { "book": "$book" },
+                chapters: { $push: "$chapters" },
+                booksInfo: {"$addToSet": "$book"}
+            }
+        },
+        {
+            $project : {
+                chapters: {
+                    $size: {
+                        $reduce: {
+                            input: "$chapters",
+                            initialValue: [],
+                            in: { $setUnion: [ "$$value", "$$this" ] }
+                        }
+                    }
+                },
+                book: {$arrayElemAt: ["$booksInfo", 0]}
+            }
+        },
+        {
+            $group : {
+                _id: "$book.testament",
+                chapters: {
+                  $sum : "$chapters"
+                }
+            }
+        }]);
+    return testamentCountArray;
+}
+
+async function getLastXdays(user, days){
+    
+    var lastxdayscount = await Record.aggregate( [
+    { 
+        $match: { 
+            user_id: user._id, 
+            date: { $gte: new Date((new Date().getTime() - (days * 24 * 60 * 60 * 1000))) }
+        }
+    },
+    {
+        $group: {
+            _id: null,
+            chapters: {
+                  $push: "$chapters"
+            }
+        }
+    },
+    {
+        $project: {
+            count : {
+                $size : {
+                      $reduce: {
+                  input: "$chapters",
+                  initialValue: [],
+                  in: { $concatArrays: ["$$value", "$$this"] }
+                  }
+                }
+              }
+        }
+    }]);
+    
+    return lastxdayscount;
+}
+
 async function getMonthChapterStat(user){
     let TODAY = new Date();
     var YEAR_BEFORE = new Date()
     YEAR_BEFORE.setFullYear(YEAR_BEFORE.getFullYear()-1);
-
-    const monthsArray = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
 
     //https://coderedirect.com/questions/243271/group-records-by-month-and-count-them-mongoose-nodejs-mongodb
     var monthCountArray = await Record.aggregate( [
