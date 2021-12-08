@@ -60,9 +60,7 @@ app.get("/", authMiddleware, (req, res) => {
 
 app.get("/history", authMiddleware, recordController.search);
 
-app.get("/stats", authMiddleware, (req, res) => {
-    res.render("stats", {_pageName: "stats"});
-});
+app.get("/stats", authMiddleware, recordController.stats);
 
 app.get("/record", authMiddleware, recordController.record);
 

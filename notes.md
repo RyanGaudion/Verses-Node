@@ -59,11 +59,11 @@ ToDo: Create a table of all books & how much is complete??
 
 December ToDo:
 - **Record Page**
-  - Change View & Edit Record to Single button
-  - Add edit record functionality
-  - Add delete record functionality (popup)
+  - Change View & Edit Record to Single button (done)
+  - Add edit record functionality (done)
+  - Add delete record functionality - popup (done)
   - Add ability to bookmark records
-  - Add Pagination
+  - Add Pagination (done)
 
 - **bookmarks** (future)
   - Show page of just records & their notes 
