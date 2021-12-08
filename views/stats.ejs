@@ -4,6 +4,7 @@
     <%- include('common/head'); -%>
     <title>Stats</title>
     <script src="https://unpkg.com/alpinejs@3.7.0/dist/cdn.min.js" defer></script>
+    <script src="/js/stats.js"></script>
 </head>
 <body>
     <div class="min-h-full0">
@@ -68,7 +69,7 @@
             </div>
 
             <!--Graphs-->
-            <div x-data="app()" x-cloak class="antialiased px-4">
+            <div x-data="yearGraphApp(<%= JSON.stringify(monthCount) %>)" x-cloak class="antialiased px-4">
                 <div class="max-w-lg mx-auto">
                   <div class="shadow p-6 rounded-lg bg-white">
                     <div class="md:flex md:justify-between md:items-center">
@@ -137,43 +138,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            
-              <script>
-                function app() {
-                  return {
-                    chartHeight: 200,
-                    get maxValue(){
-                        return Math.max.apply(Math, this.chartData);
-                    },
-                    chartData: [112, 10, 225, 134, 101, 80, 50, 100, 200],
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-            
-                    tooltipContent: '',
-                    tooltipOpen: false,
-                    tooltipX: 0,
-                    tooltipY: 0,
-                    showTooltip(e) {
-                      console.log(e);
-                      this.tooltipContent = e.target.textContent
-                      this.tooltipX = e.target.offsetLeft - e.target.clientWidth;
-                      this.tooltipY = e.target.clientHeight + e.target.clientWidth;
-                    },
-                    hideTooltip(e) {
-                      this.tooltipContent = '';
-                      this.tooltipOpen = false;
-                      this.tooltipX = 0;
-                      this.tooltipY = 0;
-                    }
-                  }
-                }
-              </script>
-              
-              
-              
-                
-
-        
+              </div>         
     </div>
 </body>
 </html>
