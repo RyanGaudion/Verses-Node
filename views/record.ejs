@@ -37,7 +37,7 @@
                             <label for="book" class="sr-only">Book</label>
                             <select id="book" name="book" x-model="selectedBookName" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300  text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                                 <option x-bind:disabled="currentItem.chapters > 0" selected value> -- Select a book -- </option>
-                                <template x-for="book in books" :key="book">
+                                <template x-for="book in books" :key="book.name">
                                     <option x-text="book.name"></option>
                                 </template>
                             </select>
