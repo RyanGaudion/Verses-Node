@@ -62,20 +62,20 @@ December ToDo:
   - Change View & Edit Record to Single button (done)
   - Add edit record functionality (done)
   - Add delete record functionality - popup (done)
-  - Add ability to bookmark records
+  - Add ability to bookmark records (future)
   - Add Pagination (done)
 
 - **bookmarks** (future)
   - Show page of just records & their notes 
 
 - **Stats**
-  - Get stats page working
-  - Add stats graph
+  - Get stats page working (done)
+  - Add stats graph (done)
 
-- **Dashboard**
+- **Dashboard** (future)
   - Change stats page to dashboard
-  - Make just a list of buttons (my records, my stats, add records) ...
+  - Make just a list of buttons (my records, my stats, add records) 
 
 
-- **Improvements**
+- **Improvements** (future)
   - Make record deletes done with Ajax   
