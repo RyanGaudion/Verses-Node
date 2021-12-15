@@ -939,8 +939,8 @@ select {
   margin-left: 0.5rem;
 }
 
-.-mt-6 {
-  margin-top: -1.5rem;
+.-mt-8 {
+  margin-top: -2rem;
 }
 
 .-mt-px {
@@ -1139,6 +1139,11 @@ select {
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.rotate-90 {
+  --tw-rotate: 90deg;
+  transform: var(--tw-transform);
 }
 
 .transform {
@@ -2141,6 +2146,10 @@ select:invalid {
     }
   }
 
+  .md\:-mt-6 {
+    margin-top: -1.5rem;
+  }
+
   .md\:ml-0 {
     margin-left: 0px;
   }
@@ -2167,6 +2176,11 @@ select:invalid {
 
   .md\:w-5 {
     width: 1.25rem;
+  }
+
+  .md\:rotate-0 {
+    --tw-rotate: 0deg;
+    transform: var(--tw-transform);
   }
 
   .md\:items-center {
