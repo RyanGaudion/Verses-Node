@@ -13,7 +13,7 @@ exports.login = async (req, res) => {
         if (match) {
             req.session.userID = user._id;
             console.log(req.session.userID);
-            res.redirect('/');
+            res.redirect('history');
             return
         }
 
