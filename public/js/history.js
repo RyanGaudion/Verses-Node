@@ -9,17 +9,16 @@ const cancelClick = () => {
     deletePopup.classList.add("hidden");
 }
 
-const filterClick = () => {
-  var filterMenu = document.getElementById("filterMenu");
-  filterMenu.classList.toggle("hidden");
-}
-
 window.onload = function(){
   var divToHide = document.getElementById("filterMenu");
+  var parentDiv = document.getElementById("filterParent");
   document.onclick = function(e){
-    if(e.target.id !== 'filterMenu' && e.target.id !== 'filterButton'){
+    if(!parentDiv.contains(e.target)){
       //element clicked wasn't the div; hide the div
       divToHide.classList.add("hidden");
+    }
+    else{
+      divToHide.classList.toggle("hidden");
     }
   };
 };
