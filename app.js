@@ -55,7 +55,7 @@ const authMiddleware = async (req, res, next) => {
 }
 
 app.get("/", authMiddleware, (req, res) => {
-    res.render("history", {_pageName: "history"});
+    res.render("index", {_pageName: "index"});
 });
 
 app.get("/history", authMiddleware, recordController.search);
