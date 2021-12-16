@@ -10,6 +10,7 @@ const recordSchema = new Schema(
             ref: "User",
         },
         chapters: [{type: Number}],
+        bookmarked: {type: Boolean, default: false},
         notes: {type: String}
     },
     { timestamps: true }

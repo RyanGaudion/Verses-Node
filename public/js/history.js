@@ -9,6 +9,21 @@ const cancelClick = () => {
     deletePopup.classList.add("hidden");
 }
 
+const filterClick = () => {
+  var filterMenu = document.getElementById("filterMenu");
+  filterMenu.classList.toggle("hidden");
+}
+
+window.onload = function(){
+  var divToHide = document.getElementById("filterMenu");
+  document.onclick = function(e){
+    if(e.target.id !== 'filterMenu' && e.target.id !== 'filterButton'){
+      //element clicked wasn't the div; hide the div
+      divToHide.classList.add("hidden");
+    }
+  };
+};
+
 function pageData(count, page, limit) {
     return {
       recordCount: count,
