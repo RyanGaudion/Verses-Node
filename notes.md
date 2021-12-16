@@ -79,3 +79,8 @@ December ToDo:
 
 - **Improvements** (future)
   - Make record deletes done with Ajax   
+
+  Bookmarks:
+  - Should these be done on the record or on the user?
+  - I think on the record - have a boolean called bookmarked
+     - (Create a filter on history page to filter based upon bookmark or has notes)

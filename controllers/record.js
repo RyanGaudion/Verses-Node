@@ -11,28 +11,46 @@ exports.search = async(req, res) => {
         const searchQuery = req.query.search;
         const limit = parseInt(req.query.limit) || 10; // Make sure to parse the limit to number
         const page = parseInt(req.query.page) || 1;
+        const filter = req.query.filter || "all";
 
         var records;
         var count;
-        if(searchQuery){
-         records =  await Record.find(
-             { user_id: user._id, $text: { $search: searchQuery}},
-             { score: { $meta: "textScore" } }
-          ).skip((limit * page) - limit).limit(limit)
-          .sort({date: 'desc'});
+        if(filter == "bookmarked"){
+            records =  await Record.find(
+                { user_id: user._id, bookmarked: true },
+                ).skip((limit * page) - limit).limit(limit)
+                .sort({date: 'desc'});
+    
+            count = await Record.countDocuments({ user_id: user._id, bookmarked: true });
+        }
+        else if(filter == "notes"){
+            records =  await Record.find(
+                { user_id: user._id, notes: { $ne: null } },
+                ).skip((limit * page) - limit).limit(limit)
+                .sort({date: 'desc'});
 
-          count = await Record.countDocuments({ user_id: user._id, $text: { $search: searchQuery}});
-        
+            count = await Record.countDocuments({ user_id: user._id, notes: { $ne: null }  });
         }
         else{
-            records = await Record.find({user_id: user._id})
-            .skip((limit * page) - limit).limit(limit)
-            .sort({date: 'desc'});
-
-            count = await Record.countDocuments({user_id: user._id});
+            if(searchQuery){
+                records =  await Record.find(
+                { user_id: user._id, $text: { $search: searchQuery}},
+                { score: { $meta: "textScore" } }
+                ).skip((limit * page) - limit).limit(limit)
+                .sort({date: 'desc'});
+    
+                count = await Record.countDocuments({ user_id: user._id, $text: { $search: searchQuery}});
+            }
+            else{
+                records = await Record.find({user_id: user._id})
+                .skip((limit * page) - limit).limit(limit)
+                .sort({date: 'desc'});
+    
+                count = await Record.countDocuments({user_id: user._id});
+            }
         }
    
-        res.render("history", {_pageName: "history", records: records, query: searchQuery, count: count, page: page, limit: limit});
+        res.render("history", {_pageName: "history", records: records, query: searchQuery, count: count, page: page, limit: limit, filter: filter});
     }
     catch(e){
        console.log(e);
@@ -50,6 +68,8 @@ exports.create = async(req, res) => {
 
         const recordId = req.body.recordId;
 
+        const bookmarkToggle = req.body.bookmarkToggle;
+        console.log(bookmarkToggle);
         chapterArr = [];
         for(let i=startChapter; i<endChapter + 1; i++)
         {
@@ -59,14 +79,19 @@ exports.create = async(req, res) => {
 
         console.log(req.body.date);
         if(recordId){
-            const updatedRecord = {
-                date: req.body.date,
-                book: req.body.book,
-                notes: req.body.notes,
-                chapters: chapterArr
-            }
-            //var record = await Record.findById(recordId);
-            const record = await Record.updateOne({ _id: recordId }, updatedRecord);
+            var record = {}
+            Record.findOne({ _id: recordId }, function(err, updateRecord) {
+                updateRecord.date = req.body.date;
+                updateRecord.book = req.body.book;
+                updateRecord.notes = req.body.notes;
+                updateRecord.chapters = chapterArr;
+                if(bookmarkToggle == 'true'){
+                    updateRecord.bookmarked = updateRecord.bookmarked != null ? !updateRecord.bookmarked : true;
+                }
+                updateRecord.save(function(err, newRecord) {
+                    record = newRecord;
+                });
+            });
         }
         else{
             await Record.create({
@@ -74,7 +99,8 @@ exports.create = async(req, res) => {
                 book: req.body.book,
                 notes: req.body.notes,
                 user_id: user._id,
-                chapters: chapterArr
+                chapters: chapterArr,
+                bookmarked: bookmarkToggle
             });
         }
 
