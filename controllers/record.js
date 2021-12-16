@@ -25,11 +25,11 @@ exports.search = async(req, res) => {
         }
         else if(filter == "notes"){
             records =  await Record.find(
-                { user_id: user._id, notes: { $ne: null } },
+                { user_id: user._id, notes: {"$exists" : true, "$ne" : ""} },
                 ).skip((limit * page) - limit).limit(limit)
                 .sort({date: 'desc'});
 
-            count = await Record.countDocuments({ user_id: user._id, notes: { $ne: null }  });
+            count = await Record.countDocuments({ user_id: user._id, notes: {"$exists" : true, "$ne" : ""}  });
         }
         else{
             if(searchQuery){
