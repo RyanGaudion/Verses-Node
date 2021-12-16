@@ -1399,6 +1399,11 @@ select {
   background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
 }
 
+.bg-indigo-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(129, 140, 248, var(--tw-bg-opacity));
+}
+
 .bg-blue-600 {
   --tw-bg-opacity: 1;
   background-color: rgba(37, 99, 235, var(--tw-bg-opacity));
@@ -1949,6 +1954,11 @@ select:invalid {
 .hover\:bg-indigo-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
+}
+
+.hover\:bg-indigo-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(99, 102, 241, var(--tw-bg-opacity));
 }
 
 .hover\:bg-blue-400:hover {

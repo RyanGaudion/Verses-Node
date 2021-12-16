@@ -68,6 +68,8 @@ exports.create = async(req, res) => {
 
         const recordId = req.body.recordId;
 
+        const bookmarkToggle = req.body.bookmarkToggle;
+        console.log(bookmarkToggle);
         chapterArr = [];
         for(let i=startChapter; i<endChapter + 1; i++)
         {
@@ -77,14 +79,19 @@ exports.create = async(req, res) => {
 
         console.log(req.body.date);
         if(recordId){
-            const updatedRecord = {
-                date: req.body.date,
-                book: req.body.book,
-                notes: req.body.notes,
-                chapters: chapterArr
-            }
-            //var record = await Record.findById(recordId);
-            const record = await Record.updateOne({ _id: recordId }, updatedRecord);
+            var record = {}
+            Record.findOne({ _id: recordId }, function(err, updateRecord) {
+                updateRecord.date = req.body.date;
+                updateRecord.book = req.body.book;
+                updateRecord.notes = req.body.notes;
+                updateRecord.chapters = chapterArr;
+                if(bookmarkToggle == 'true'){
+                    updateRecord.bookmarked = updateRecord.bookmarked != null ? !updateRecord.bookmarked : true;
+                }
+                updateRecord.save(function(err, newRecord) {
+                    record = newRecord;
+                });
+            });
         }
         else{
             await Record.create({
@@ -92,7 +99,8 @@ exports.create = async(req, res) => {
                 book: req.body.book,
                 notes: req.body.notes,
                 user_id: user._id,
-                chapters: chapterArr
+                chapters: chapterArr,
+                bookmarked: bookmarkToggle
             });
         }
 
