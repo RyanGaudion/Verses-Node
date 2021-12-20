@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@tailwindcss/forms": "^0.3.4",
+    "@tailwindcss/forms": "^0.4.0",
     "autoprefixer": "^10.4.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
@@ -15,20 +15,24 @@
     "express-session": "^1.17.2",
     "loading-cli": "^1.1.0",
     "mongoose": "^6.0.13",
-    "postcss": "^8.3.11",
-    "tailwindcss": "^2.2.17"
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.14"
   },
   "scripts": {
-    "start": "npm run build-css-prod && node app.js",
-    "build-css": "tailwindcss build -i private/style.css -o public/css/style.css",
-    "build-css-prod": "tailwindcss build -i private/style.css -o public/css/style.css --jit --purge \"./**/*.ejs\" \"./**/*.html\"",
-    "dev-purge": "nodemon -e js,ejs,json,html --exec \"npm run build-css-prod && node app.js\"",
-    "dev": "nodemon app.js",
-    "seedProduction": "cross-env NODE_ENV=production node seeder.js",
-    "seed": "node seeder.js"
+    "start": "npm run build:css && node app.js",
+    "dev-test" : "nodemon -e js,ejs,json,html,css",
+    "dev": "nodemon -e js,ejs,json,html --exec \"npm run dev:tailwind && node app.js\"",
+    "dev:tailwind": "tailwindcss -i private/style.css -o public/css/style.css",
+    "build": "npm-run-all build:css build:run",
+    "build:run": "node app.js",
+    "build:css": "tailwindcss -i private/style.css -o public/css/style.css --minify",
+    "test:tailwind": "tailwindcss -i private/style.css -o public/css/style.css --watch",
+    "seed-prod": "cross-env NODE_ENV=production node seeder.js",
+    "seed-dev": "node seeder.js"
   },
   "repository": {
     "type": "git",
