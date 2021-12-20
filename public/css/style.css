@@ -1820,11 +1820,6 @@ select:invalid {
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-rose-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(251 113 133 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-opacity-75:hover {
   --tw-bg-opacity: 0.75;
 }
