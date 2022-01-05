@@ -2,7 +2,7 @@
   "name": "Verses-Node",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "dependencies": {
     "@tailwindcss/forms": "^0.4.0",
     "autoprefixer": "^10.4.0",
