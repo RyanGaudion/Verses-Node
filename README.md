@@ -21,6 +21,15 @@ In order to run production locally, use:
 Finally used by Heroku:
 - `npm run start`
 
+### Example .env
+In order for the application to run an environment file needs to be created (`.env`). An example of which can be seen below:
+
+```
+PORT=8080
+MONGODB_URI=mongodb+srv://user:server/db?options
+MONGODB_PRODUCTION_URI=mongodb+srv://user:server/db?options
+```
+
 # Screenshots
 
 ![Stats](./images/StatsPage.png)
