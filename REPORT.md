@@ -155,8 +155,7 @@ In order to do this have created a new branch in the GitHub Repository to work o
 
 From the application side there is also one improvement I would like to implement. Currently the search bar on the history page only searches on text properties of the reading record which does not include the date. I would improve the application by either adding the date field to the search index or change the backend logic to recognise date inputs. 
 
-![New Design 1](./images/NewDesign1.jpg)
-![New Design 2](./images/NewDesign2.jpg)
+![New Design 1](./images/NewDesign1.jpg) ![New Design 2](./images/NewDesign2.jpg)
 
 # References
 1. Dexter, Allison. “How Many Words Are in the Bible?” Word Counter, https://wordcounter.io/blog/how-many-words-are-in-the-bible/.
