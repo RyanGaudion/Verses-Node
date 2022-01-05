@@ -53,6 +53,10 @@ The signed in user is associated to their account via a user session which allow
 
 ![Register](./images/RegisterPage.png)
 
+Below is a system diagram to see how each layer of the MVC application works together:
+
+![System Diagram](./images/diagrams/SystemDesign.drawio.png)
+
 # Key Design Decisions
 
 ## Database Design
@@ -146,13 +150,6 @@ Due to the usability issues as well as the lack of design consistency, I have cr
 
 ![New Design 1](./images/NewDesign1.jpg)
 ![New Design 2](./images/NewDesign2.jpg)
-
-
-Need a diagram in System Overview
-strongly justified.
-critical Reflection & Critical Insights
-
-
 
 # References
 1. Dexter, Allison. “How Many Words Are in the Bible?” Word Counter, https://wordcounter.io/blog/how-many-words-are-in-the-bible/.
