@@ -1,6 +1,5 @@
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  content: ["./{views,public}/**/*.{html,ejs,js}"],
   theme: {
     container: {
       center: true,
