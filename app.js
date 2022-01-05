@@ -8,7 +8,7 @@ const expressSession = require("express-session");
 const User = require('./models/User');
 app.set("view engine", "ejs");
 
-const { PORT, MONGODB_URI } = process.env;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 const userController = require("./controllers/user");
 const recordController = require("./controllers/record");
@@ -93,6 +93,7 @@ app.get("/logout", async (req, res) => {
 //API endpoints
 app.get("/api/book/getall", bookApiController.list);
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Verses app listening at http://localhost:${PORT}`);
 });
