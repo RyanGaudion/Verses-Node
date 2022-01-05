@@ -25,7 +25,7 @@
     "dev": "npm-run-all -p dev:tailwind dev:run",
     "dev:run": "supervisor app.js",
     "dev:tailwind": "tailwindcss -i private/style.css -o public/css/style.css --watch",
-    "prod": "npm-run-all build:css build:run",
+    "prod": "npm-run-all prod:css prod:run",
     "prod:run": "node app.js",
     "prod:css": "tailwindcss -i private/style.css -o public/css/style.css --minify",
     "seed-prod": "cross-env NODE_ENV=production node seeder.js",

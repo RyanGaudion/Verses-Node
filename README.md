@@ -10,9 +10,16 @@ The application is built using Node.js using the express.js framework. The UI us
 The application uses an MVC design with 2 types of controllers. Normal controllers which return a view with data and api controllers which return only JSON objects in order to allow AJAX on some of the pages.
 
 ## Run the application
-In order to run the application, run:
+In order to run the application for development run the following commands. (Dev differs from production by the fact it sets up a TailwindCSS watcher, meaning any changes to the UI will automatically update the output Tailwind CSS file):
 
-`npm install` and then `npm run dev-purge` (the purge command will make sure tailwind css has the correct css in its output file).
+ - `npm install` and then `npm run dev` 
+ 
+In order to run production locally, use:
+
+- `npm install` and then `npm run prod`
+
+Finally used by Heroku:
+- `npm run start`
 
 # Screenshots
 
