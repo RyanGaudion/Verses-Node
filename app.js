@@ -8,7 +8,8 @@ const expressSession = require("express-session");
 const User = require('./models/User');
 app.set("view engine", "ejs");
 
-const { PORT, MONGODB_URI } = process.env;
+const PORT = process.env.PORT || 8080;
+const MONGODB_URI = process.env.MONGODB_URI || 8080;
 
 const userController = require("./controllers/user");
 const recordController = require("./controllers/record");
