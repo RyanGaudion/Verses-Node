@@ -144,9 +144,12 @@ One way to solve the scalability issue is to move to a serverless design. This w
 # Conclusion and Reflection
 On reflection, this prototype application includes all the features I set out to include plus more (bookmarking & notes). It fulfills its original goal of allowing me to track my progress through the Bible.
 
-However, after extensively using this application for the past month I have seen many usability issues with the application (especially on mobile devices). The application is barely mobile responsive and shows weird behavior on smaller devices. 
+This application is only a proof of concept and hence does have limitations, such as its usability on mobile devices. The application is not fully mobile responsive and shows strange UI behaviour on smaller devices.
 
-Due to the usability issues as well as the lack of design consistency, I have created a new branch in the GitHub Repository to work on the user interface. These changes won't be deployed with this prototype however you can see below a first draft of the redesigned UI:
+To improve this application further I would generally improve the UI, including design consistency as well as mobile responsiveness.
+In order to do this have created a new branch in the GitHub Repository to work on the user interface. These changes won't be deployed with this prototype however you can see below a first draft of the redesigned UI:
+
+From the application side there is also one improvement I would like to implement. Currently the search bar on the history page only searches on text properties of the reading record which does not include the date. I would improve the application by either adding the date field to the search index or change the backend logic to recognise date inputs. 
 
 ![New Design 1](./images/NewDesign1.jpg)
 ![New Design 2](./images/NewDesign2.jpg)
