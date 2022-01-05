@@ -19,9 +19,9 @@ The benefits of Tailwind CSS (a CSS Utility Framework) & AlpineJS (A lightweight
 There are 2 main parts of the application, the reading history & the stats:
 
 ## History
-The history page shows a list of all records that have been entered into the system. This page is paginated using `skip` and `limit` from mongoose. 
+The history page shows a list of all records that have been entered into the system. This page is paginated using `skip` and `limit` from mongoose. The use of pagination means that not all records have to be loaded from the database at once - allowing the page to load much faster.
 
-It also provides the ability to filter the page to records that are bookmarked or records that have notes. This is selected via a dropdown which in the backend executes one of 3 mongoose queries each with unique filters. This page also has the ability to search through records, which works by setting up a full text index on the Record Model to search against.
+It also provides the ability to filter the page to records that are bookmarked or records that have notes. This is selected via a dropdown which in the backend executes one of 3 mongoose queries each with unique filters. This page also has the ability of full text search through records, which works by setting up a full text index on the Record Model to search against. This allows the user to easily find records with a specific word in their notes.
 
 From this page you have the ability to "view" and "delete" each record. The view button opens a pre-populated record page which allows values to be updated. The delete button shows a confirmation popup and then uses Mongoose to delete the record. Finally, this page provides an "Add" button to insert a new record.
 
@@ -34,7 +34,7 @@ The Record page is accessible either by adding a new record or editing an existi
 The Date field produces a custom Date picker which was created using AlpineJS and Tailwind CSS.  
 In order for the user to enter the Book of the Bible, as well as the Start & End Chapter, I could have allowed free text entry. However, running any type of statistics on this would be difficult. Due to the fact the Bible is immutable, the range of values for books & chapters are fixed values that never change.  
 
-Hence, within my database seeder I pre-populate the database with the names & sizes of each of the book of the Bible. I then created an API endpoint `/api/book/getall` which returns all this information in JSON. From my record page, I then used AlpineJS to create a custom component for selecting the Book, Start Chapter & End Chapter. This component uses the JavaScript "Fetch" method (similar to jQuery.ajax()) in order to fetch the API data without having to reload the page.
+Hence, within my database seeder I pre-populate the database with the names & sizes of each of the book of the Bible. I then created an API endpoint `/api/book/getall` which returns all this information in JSON. From my record page, I then used AlpineJS to create a custom component for selecting the Book, Start Chapter & End Chapter. This component uses the JavaScript "Fetch" method (similar to jQuery.ajax()) in order to fetch the API data without having to reload the page resulting in quicker page load times.
 
 This page finally has 2 buttons "Bookmark/Unbookmark" and "Save". This allows the user to bookmark certain records which they found interesting/useful. These records can then be found via the "Bookmarked" filter on the history page. In the backend this simply works by storing a bookmarked boolean on the Record Model. 
 
@@ -44,7 +44,7 @@ This page finally has 2 buttons "Bookmark/Unbookmark" and "Save". This allows th
 
 The stats page is split into 2 main sections, quick statistics (which provide short summaries such as how many chapters have been read in the last 30 days, or what percentage of the Bible is complete) and the monthly graph (which shows in a chart how many chapters have been read per month for the last year).
 
-These statistics are calculated using multiple complex MongoDB aggregation pipelines and are then displayed on screen via EJS. The graph also uses MongoDB aggregation for its data and then uses AlpineJS and Tailwind CSS to visualise this data into a graph. 
+These statistics are calculated using multiple complex MongoDB aggregation pipelines and are then displayed on screen via EJS. The graph provides data visulisation for the user to easily see their current reading habit vs previous months. This also uses aggregation for its data as well as AlpineJS and TailwindCSS for the graph's UI. 
 
 ![Stats](./images/StatsPage.png)
 
