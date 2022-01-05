@@ -1,25 +1,25 @@
 # Verses Web Application
-Hosted Application: http://verses-eu.herokuapp.com/
+Hosted Application: http://verses-eu.herokuapp.com/  
 Repository: https://github.com/RyanGaudion/Verses-Node
 
 # Introduction
 As a Christian, the Bible is the most important book ever written. We believe the words within it are breathed from God himself. However, the Bible is a huge collection of 66 books split between the Old & New Testament amounting to 783,137 words.`(1)`  For context, this is over 6 times larger than the 122,189 words of Pride & Prejudice.  
 
-In addition to this, the Bible does not have to be read chronologically, making it difficult to keep track of which books and which chapters in those books you have read.  
+In addition to this, the Bible does not have to be read chronologically, making it difficult to keep track which parts of it you have read.
 
-My application provides a way to keep track of your progress through the Bible and also provides statistics on your reading habits in optimise the experience of reading the entire Bible.
+My application provides a way to keep track of your progress through the Bible and also provides statistics on your reading habits in order to assist you in reading the entire Bible.
 
 # System Overview
-This application is built using Node.js for the backend connecting to a MongoDB database with EJS, Tailwind CSS & AlpineJS for the views.  
+This application is built using Node.js for the backend, connecting to a MongoDB database while using EJS, Tailwind CSS & AlpineJS for the views.  
 
 There are 2 main parts of the application, the reading history & the stats:
 
 ## History
 The history page shows a list of all records that have been entered into the system. This page is paginated using `skip` and `limit` from mongoose. 
 
-It also provides the ability to filter the page to records that are bookmarked or records that have notes. This is selected via a dropdown which in the backend executes one of 3 mongoose queries each with unique filters. This page also has the ability to search through records which works by setting up a full text index on the Record Model to search against.
+It also provides the ability to filter the page to records that are bookmarked or records that have notes. This is selected via a dropdown which in the backend executes one of 3 mongoose queries each with unique filters. This page also has the ability to search through records, which works by setting up a full text index on the Record Model to search against.
 
-From this page you have the ability to "view" and "delete" each record. The view button opens a pre-populated record page which allows values to be updated whereas the delete button submits a unique form which deletes the record after showing a confirmation popup.Finally, this page provides an "Add" button to insert a new record.
+From this page you have the ability to "view" and "delete" each record. The view button opens a pre-populated record page which allows values to be updated. The delete button shows a confirmation popup and then uses Mongoose to delete the record. Finally, this page provides an "Add" button to insert a new record.
 
 ![History](./images/HistoryPage.png)
 
@@ -27,10 +27,10 @@ From this page you have the ability to "view" and "delete" each record. The view
 
 The Record page is accessible either by adding a new record or editing an existing reading record. This page includes 5 fields, 'Date', 'Book', 'Start Chapter', 'End Chapter' and 'Notes'.
 
-The Date field produces a custom Date picker which was created using AlpineJS and Tailwind CSS.
-In order for the user to enter the Book of the Bible as well as the Start & End Chapter I could have allowed free text entry, however running any type of statistics on this would be difficult. Due to the fact the Bible is immutable, the selection of Books and Chapters for those books is a fixed value that never changes.  
+The Date field produces a custom Date picker which was created using AlpineJS and Tailwind CSS.  
+In order for the user to enter the Book of the Bible, as well as the Start & End Chapter, I could have allowed free text entry. However, running any type of statistics on this would be difficult. Due to the fact the Bible is immutable, the range of values for books & chapters are fixed values that never change.  
 
-Hence, within my database seeder I pre-populate the database with the names & sizes of each of the books of the Bible. I then created an API endpoint `/api/book/getall` which returns all this information in JSON. From my record page, I then used AlpineJS to create a custom component for selecting the Book, Start Chapter & End Chapter. This component uses the JavaScript "Fetch" method (similar to jQuery.ajax()) in order to fetch the API data without having to reload the page.
+Hence, within my database seeder I pre-populate the database with the names & sizes of each of the book of the Bible. I then created an API endpoint `/api/book/getall` which returns all this information in JSON. From my record page, I then used AlpineJS to create a custom component for selecting the Book, Start Chapter & End Chapter. This component uses the JavaScript "Fetch" method (similar to jQuery.ajax()) in order to fetch the API data without having to reload the page.
 
 This page finally has 2 buttons "Bookmark/Unbookmark" and "Save". This allows the user to bookmark certain records which they found interesting/useful. These records can then be found via the "Bookmarked" filter on the history page. In the backend this simply works by storing a bookmarked boolean on the Record Model. 
 
@@ -45,11 +45,11 @@ These statistics are calculated using multiple complex MongoDB aggregation pipel
 ![Stats](./images/StatsPage.png)
 
 ## User
-Each reading record is a User model in order that only the current user's records are displayed to them via the history page. The user can create an account via the register page and then sign in to their account via the login page.  
+The user can create an account via the register page and then sign in to their account via the login page.  
 
 The user's password is not stored in the database directly, but instead uses a database model pre-hook & BCrypt in order to hash the password before it is stored in the database.  
 
-The sign in user is associated to their account via a user session which allows the application to know the current user from within every controller.
+The signed in user is associated to their account via a user session which allows the application to know the current user from within every controller.
 
 ![Register](./images/RegisterPage.png)
 
@@ -66,7 +66,7 @@ The books collection stores information about each book in the bible. This infor
 
 An example value from this collection can be seen below:
 ```
-_id : 619fa78ea7c8a72d28930afd
+_id : 619fa98ga6c8a62d28930afd
 number : 1
 name : "Genesis"
 chapters : 50
@@ -83,10 +83,10 @@ Currently only `number`, `name`, `chapters` and `testament` are being used, howe
 The records collection is used in order to store each individual reading record of a user. It contains all the information required about that record such as the date, book, start & end chapters as well as notes. An example value from this collection can be seen below:
 
 ```
-_id : 619fb85e5a57cd2936e64d07
+_id : 619fb85e5a57cd2936e34d08
 date : 2021-11-24T00:00:00.000+00:00
 book : "Luke"
-user_id : 619fb8405a57cd2936e64cf8
+user_id : 619fb7305a37cd2936e64cf8
 chapters : [
     5, 6, 7, 8
 ]
@@ -101,20 +101,20 @@ There also is a relationship from the record model to the book model which is li
 Finally to note, we store the chapters that the user has read as a single array of values, rather than a "start chapter" and an "end chapter" as seen in the UI. This is to allow additional features in the future where a user may want to select non-sequential chapters from a book.
 
 ### Users
-The users collection stores the login information of each user allowing records to be unique to each user. An example value from this collection can be seen below:
+The users collection stores the login information of each user, allowing reading records to be associated with a user. An example value from this collection can be seen below:
 
 ```
-_id : 619f48dcb4c93a18ad9a6a4b
-fullname : "Ryan Gaudion"
-email : "rgaudion@gmail.com"
-password : "$2b$10$obPAfIpV0Uoc7lJhglVOWe6llpNGlOv5tk6paF6.5BDYO5.qzmHKe"
+_id : 619f48dcb4c63a01ad9b8a4b
+fullname : "Test User 1"
+email : "test1@test.com"
+password : "$2b$19$psQRbIpV0Uoc7lJhglVOWe8aapNGlOv5tk6paF6.5BDYO5.qzmHKe"
 createdAt : 2021-11-25T08:27:08.488+00:00
 updatedAt : 2021-11-25T08:27:08.488+00:00
 ```
 
 Here we can see the hashed version of the password rather than a plaintext copy as well as the username of the user (their email address).
 
-Here you can see a class diagram for each of the collections in the database and how they relate. Despite the fact this is a non-relational database, the class diagram is useful in order to visualise how different models relate to each other.
+Here you can see a class diagram for each of the collections in the database and how they relate. Despite the fact this is a non-relational database, the class diagram is useful in order to visualise how different models are associated with each other.
 
 
 ![Diagrams](./images/diagrams/ClassDiagram.drawio.png)
@@ -122,7 +122,7 @@ Here you can see a class diagram for each of the collections in the database and
 ## Security and Scalability
 
 ### Security
-From a security point of view, the only sensitive information that this application is holding would be the password of a user. In order to reduce the risk of holding this information I have made sure to only hold hash of the password. The hashing is done with BCrypt meaning salting of the password is included as well. Salting protects the password against rainbow table attacks and makes sure even identical passwords give a unique output. Finally, BCrypt is a slow algorithm which is good for security as it increases the time it takes to brute force the password.
+From a security point of view, the only sensitive information that this application is holding would be the password of a user. In order to reduce the risk of holding this information I have made sure to only hold hashes of passwords. The hashing is done with BCrypt meaning salting of the password is included as well. Salting protects the password against rainbow table attacks and makes sure even identical passwords give a unique output. Finally, BCrypt is a slow algorithm which is good for security as it increases the time it takes to brute force the password.
 
 There are however many areas in which we could improve the security of the application. One area is by outsourcing the login & sign up process to a 3rd party such as Google or Facebook via OAuth or OpenId. This would eliminate all risk by no longer requiring my application to store user passwords.
 
@@ -131,11 +131,11 @@ Another area of improvement would be for the application to support HTTPS instea
 ### Deployment & Scalability
 The deployment of the application takes a DevOps approach by automatically building & releasing the application whenever a merge request is merged to the master branch. This allows for quick iterations of code which can then be tested quickly.
 
-From a scalability point of view our application's MongoDB database is already scaled horizontally across 3 nodes within our eu deployment region using sharding.`(2)` Sharding increases throughput of our databases but distributing our data across multiple nodes. However, this is not the only type of scaling our database can do. If this application was to move to production, I would recommend that Cross-Region replication was enabled in order to provide data closer to customers internationally. `(3)`
+From a scalability point of view our application's MongoDB database is already scaled horizontally across 3 nodes within our eu deployment region using sharding.`(2)` Sharding increases throughput of our databases by distributing our data across multiple nodes. However, this is not the only type of scaling our database can do. If this application was to move to production, I would recommend that Cross-Region replication was enabled in order to provide data closer to customers internationally which in turn would increase performance. `(3)`
 
-Another part of the application that would require scaling would the Node.js application itself. Currently there is 1 instance of this available (hosted in heroku) however in order to reduce load times for user's internationally or allow more customers to visit the site, the application would need to scale. Horizontal scaling is usually cheaper however does raise one concern with the current architecture. If this application was to scale horizontally (across multiple instances) I would need a way to centralise user sessions so that every instance can access these. I have 2 ways I could do this, either by load balancing the instances (and have the load balancer store the sessions) or by storing the sessions in a database. 
+Another part of the application that would require scaling would the Node.js application itself. Currently there is 1 instance of this available (hosted in heroku) however in order to reduce load times for user's internationally, or allow more customers to visit the site, the application would need to scale. Horizontal scaling is usually cheaper however does raise one concern with the current architecture. If this application was to scale horizontally (across multiple instances) I would need a way to centralise user sessions so that every instance can access them. There are 2 ways this could be done, either by load balancing the instances (and have the load balancer store the sessions) or by storing the sessions in a database. 
 
-One way to solve the scalability issue is to move to a serverless design. This would mean re-architecturing the app to only include API endpoints but by doing this I could store the site itself as a static file (in something like an S3 bucket) and have the background logic run as serverless functions (for example AWS lambda). Both S3 buckets & serverless functions combined with MongoDB cross-region replication would provide not only a highly scalable application but also would reduce the cost per user drastically.
+One way to solve the scalability issue is to move to a serverless design. This would mean re-architecturing the app to only include API endpoints. However, by doing this I could store the site itself as a static file (in something like an S3 bucket) and have the background logic run as serverless functions (for example AWS lambda). Both S3 buckets & serverless functions combined with MongoDB cross-region replication would provide not only a highly scalable application but also would reduce the cost per user drastically.
 
 # Conclusion and Reflection
 On reflection, this prototype application includes all the features I set out to include plus more (bookmarking & notes). It fulfills its original goal of allowing me to track my progress through the Bible.
