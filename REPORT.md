@@ -10,18 +10,18 @@ In addition to this, the Bible does not have to be read chronologically, making 
 My application provides a way to keep track of your progress through the Bible and also provides statistics on your reading habits in order to assist you in reading the entire Bible.
 
 # System Overview
-This application is built with an MVC (Model, View, Controller)architecture, using Node.js for the backend, connecting to a MongoDB database while using EJS, Tailwind CSS & AlpineJS for the views.
+This application is built with an MVC (Model, View, Controller) architecture, using Node.js for the backend, connecting to a MongoDB database while using EJS, Tailwind CSS & AlpineJS for the views.
 
 The reason for using a non-relational database like MongoDB was due to the read & write simplicity it provides as well as the performance benefits too. One downside of non-relational & No-SQL databases is data integrity however this application does not require high data consistency making MongoDB a perfect choice.
 
-The benefits of Tailwind CSS (a CSS Utility Framework) & AlpineJS (A lightweight framework for adding UI behaviour) is the performance they provide as well as the huge amount of code that they abstract away. They allow me to quickly iterate my design without having to spends hours writing lots of UI code. The performance benefits are outstanding too, rating my website 100/100 on Google Lighthouse tests due to their small size. Alpine JS is 15kb and TailwindCSS is 30kb which is smaller combined than BoostrapCSS on its own (60kb).
+The benefits of Tailwind CSS (a CSS Utility Framework) & AlpineJS (A lightweight framework for adding UI behaviour) is the performance they provide as well as the huge amount of code that they abstract away. They allow me to quickly iterate my design without having to spend hours writing lots of UI code. The performance benefits are outstanding too, rating my website 100/100 on Google Lighthouse tests is a result of their small size. Alpine JS is 15kb and TailwindCSS is 30kb which combined is smaller than BoostrapCSS on its own (60kb).
 
 There are 2 main parts of the application, the reading history & the stats:
 
 ## History
-The history page shows a list of all records that have been entered into the system. This page is paginated using `skip` and `limit` from mongoose. The use of pagination means that not all records have to be loaded from the database at once - allowing the page to load much faster.
+The history page shows a list of all records that have been entered into the system. This page is paginated using `skip` and `limit` from Mongoose. The use of pagination means that not all records have to be loaded from the database at once - allowing the page to load much faster.
 
-It also provides the ability to filter the page to records that are bookmarked or records that have notes. This is selected via a dropdown which in the backend executes one of 3 mongoose queries each with unique filters. This page also has the ability of full text search through records, which works by setting up a full text index on the Record Model to search against. This allows the user to easily find records with a specific word in their notes.
+It also provides the ability to filter the page to records that are bookmarked or records that have notes. This is selected via a dropdown which in the backend executes one of 3 Mongoose queries each with unique filters. This page also has the ability of full text search through records, which works by setting up a full text index on the Record Model to search against. This allows the user to easily find records with a specific word in their notes.
 
 From this page you have the ability to "view" and "delete" each record. The view button opens a pre-populated record page which allows values to be updated. The delete button shows a confirmation popup and then uses Mongoose to delete the record. Finally, this page provides an "Add" button to insert a new record.
 
