@@ -19,30 +19,30 @@ The benefits of Tailwind CSS (a CSS Utility Framework) & AlpineJS (A lightweight
 There are 2 main parts of the application, the reading history & the stats:
 
 ## History
-The history page shows a list of all records that have been entered into the system. This page is paginated using `skip` and `limit` from Mongoose. The use of pagination means that not all records have to be loaded from the database at once - allowing the page to load much faster.
+The History Page shows a list of all records that have been entered into the system. This page is paginated using `skip` and `limit` from Mongoose. The use of pagination means that not all records have to be loaded from the database at once - allowing the page to load much faster.
 
 It also provides the ability to filter the page to records that are bookmarked or records that have notes. This is selected via a dropdown which in the backend executes one of 3 Mongoose queries each with unique filters. This page also has the ability of full text search through records, which works by setting up a full text index on the Record Model to search against. This allows the user to easily find records with a specific word in their notes.
 
-From this page you have the ability to "view" and "delete" each record. The view button opens a pre-populated record page which allows values to be updated. The delete button shows a confirmation popup and then uses Mongoose to delete the record. Finally, this page provides an "Add" button to insert a new record.
+From this page you have the ability to "view" and "delete" each record. The view button opens a pre-populated Record Page which allows values to be updated. The delete button shows a confirmation popup and then uses Mongoose to delete the record. Finally, this page provides an "Add" button to insert a new record.
 
 ![History](./images/HistoryPage.png)
 
 ### Record
 
-The Record page is accessible either by adding a new record or editing an existing reading record. This page includes 5 fields, 'Date', 'Book', 'Start Chapter', 'End Chapter' and 'Notes'.
+The Record Page is accessible either by adding a new record or editing an existing reading record. This page includes 5 fields, 'Date', 'Book', 'Start Chapter', 'End Chapter' and 'Notes'.
 
 The Date field produces a custom Date picker which was created using AlpineJS and Tailwind CSS.  
 In order for the user to enter the Book of the Bible, as well as the Start & End Chapter, I could have allowed free text entry. However, running any type of statistics on this would be difficult. 
 
-Due to the fact the Bible is immutable, the range of values for books & chapters are fixed values that never change. Hence, within my database seeder I pre-populate the database with the names & sizes of each of the book of the Bible. I then created an API endpoint `/api/book/getall` which returns all this information in JSON. From my record page, I then used AlpineJS to create a custom component for selecting the Book, Start Chapter & End Chapter. This component uses the JavaScript "Fetch" method (similar to jQuery.ajax()) in order to fetch the API data without having to reload the page resulting in quicker page load times.
+Due to the fact the Bible is immutable, the range of values for books & chapters are fixed values that never change. Hence, within my database seeder I pre-populate the database with the names & sizes of each of the book of the Bible. I then created an API endpoint `/api/book/getall` which returns all this information in JSON. From my Record Page, I then used AlpineJS to create a custom component for selecting the Book, Start Chapter & End Chapter. This component uses the JavaScript "Fetch" method (similar to jQuery.ajax()) in order to fetch the API data without having to reload the page resulting in quicker page load times.
 
-Finally, this page has 2 buttons "Bookmark/Unbookmark" and "Save". This allows the user to bookmark certain records which they found interesting/useful. These records can then be found via the "Bookmarked" filter on the history page. In the backend this simply works by storing a bookmarked boolean on the Record Model. 
+Finally, this page has 2 buttons "Bookmark/Unbookmark" and "Save". This allows the user to bookmark certain records which they found interesting/useful. These records can then be found via the "Bookmarked" filter on the History Page. In the backend this simply works by storing a bookmarked boolean on the Record Model. 
 
 ![Record](./images/RecordPage.png)
 
 ## Stats
 
-The stats page is split into 2 main sections, quick statistics (which provide short summaries such as how many chapters have been read in the last 30 days, or what percentage of the Bible is complete) and the monthly graph (which shows in a chart how many chapters have been read per month for the last year).
+The Stats Page is split into 2 main sections, quick statistics (which provide short summaries such as how many chapters have been read in the last 30 days, or what percentage of the Bible is complete) and the monthly graph (which shows in a chart how many chapters have been read per month for the last year).
 
 These statistics are calculated using multiple complex MongoDB aggregation pipelines and are then displayed on screen via EJS. The graph provides data visualisation for the user to easily see their current reading habit vs previous months. This also uses aggregation for its data as well as AlpineJS and TailwindCSS for the graph's UI. 
 
@@ -104,7 +104,7 @@ updatedAt : 2021-11-25T16:22:54.596+00:00
 
 The record model has relationships to 2 other collections. First you can see `user_id` which contains the ObjectId of the user that created this record. This is used within the application in order to show the user only records that they created.
 
-There also is a relationship from the record model to the book model which is linked via the name of the book. (In the example above this is "Luke"). This relationship is required for some of the aggregation pipelines used in the stats page, by linking a record to a book we can calculate what percentage of that book has been read by the user.
+There also is a relationship from the record model to the book model which is linked via the name of the book. (In the example above this is "Luke"). This relationship is required for some of the aggregation pipelines used in the Stats Page, by linking a record to a book we can calculate what percentage of that book has been read by the user.
 
 Finally to note, we store the chapters that the user has read as a single array of values, rather than a "start chapter" and an "end chapter" as seen in the UI. This is to allow additional features in the future where a user may want to select non-sequential chapters from a book.
 
@@ -153,7 +153,7 @@ This application is only a proof of concept and hence does have limitations, suc
 To improve this application further I would generally improve the UI, including design consistency as well as mobile responsiveness.
 In order to do this, I have created a new branch in the GitHub Repository to work on the user interface. These changes won't be deployed with this prototype however you can see below a first draft of the redesigned UI:
 
-From the application side there is also one improvement I would like to implement. Currently the search bar on the history page only searches on text properties of the reading record which does not include the date. I would improve the application by either adding the date field to the search index or change the backend logic to recognise date inputs. 
+From the application side there is also one improvement I would like to implement. Currently the search bar on the History Page only searches on text properties of the reading record which does not include the date. I would improve the application by either adding the date field to the search index or change the backend logic to recognise date inputs. 
 
 ![New Design 1](./images/NewDesign1.jpg) ![New Design 2](./images/NewDesign2.jpg)
 
