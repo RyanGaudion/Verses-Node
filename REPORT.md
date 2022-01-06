@@ -32,11 +32,11 @@ From this page you have the ability to "view" and "delete" each record. The view
 The Record page is accessible either by adding a new record or editing an existing reading record. This page includes 5 fields, 'Date', 'Book', 'Start Chapter', 'End Chapter' and 'Notes'.
 
 The Date field produces a custom Date picker which was created using AlpineJS and Tailwind CSS.  
-In order for the user to enter the Book of the Bible, as well as the Start & End Chapter, I could have allowed free text entry. However, running any type of statistics on this would be difficult. Due to the fact the Bible is immutable, the range of values for books & chapters are fixed values that never change.  
+In order for the user to enter the Book of the Bible, as well as the Start & End Chapter, I could have allowed free text entry. However, running any type of statistics on this would be difficult. 
 
-Hence, within my database seeder I pre-populate the database with the names & sizes of each of the book of the Bible. I then created an API endpoint `/api/book/getall` which returns all this information in JSON. From my record page, I then used AlpineJS to create a custom component for selecting the Book, Start Chapter & End Chapter. This component uses the JavaScript "Fetch" method (similar to jQuery.ajax()) in order to fetch the API data without having to reload the page resulting in quicker page load times.
+Due to the fact the Bible is immutable, the range of values for books & chapters are fixed values that never change. Hence, within my database seeder I pre-populate the database with the names & sizes of each of the book of the Bible. I then created an API endpoint `/api/book/getall` which returns all this information in JSON. From my record page, I then used AlpineJS to create a custom component for selecting the Book, Start Chapter & End Chapter. This component uses the JavaScript "Fetch" method (similar to jQuery.ajax()) in order to fetch the API data without having to reload the page resulting in quicker page load times.
 
-This page finally has 2 buttons "Bookmark/Unbookmark" and "Save". This allows the user to bookmark certain records which they found interesting/useful. These records can then be found via the "Bookmarked" filter on the history page. In the backend this simply works by storing a bookmarked boolean on the Record Model. 
+Finally, this page has 2 buttons "Bookmark/Unbookmark" and "Save". This allows the user to bookmark certain records which they found interesting/useful. These records can then be found via the "Bookmarked" filter on the history page. In the backend this simply works by storing a bookmarked boolean on the Record Model. 
 
 ![Record](./images/RecordPage.png)
 
@@ -44,12 +44,12 @@ This page finally has 2 buttons "Bookmark/Unbookmark" and "Save". This allows th
 
 The stats page is split into 2 main sections, quick statistics (which provide short summaries such as how many chapters have been read in the last 30 days, or what percentage of the Bible is complete) and the monthly graph (which shows in a chart how many chapters have been read per month for the last year).
 
-These statistics are calculated using multiple complex MongoDB aggregation pipelines and are then displayed on screen via EJS. The graph provides data visulisation for the user to easily see their current reading habit vs previous months. This also uses aggregation for its data as well as AlpineJS and TailwindCSS for the graph's UI. 
+These statistics are calculated using multiple complex MongoDB aggregation pipelines and are then displayed on screen via EJS. The graph provides data visualisation for the user to easily see their current reading habit vs previous months. This also uses aggregation for its data as well as AlpineJS and TailwindCSS for the graph's UI. 
 
 ![Stats](./images/StatsPage.png)
 
 ## User
-The user can create an account via the register page and then sign in to their account via the login page.  
+The user can create an account via the Register Page and then sign in to their account via the Login Page.  
 
 The user's password is not stored in the database directly, but instead uses a database model pre-hook & BCrypt in order to hash the password before it is stored in the database.  
 
@@ -130,7 +130,7 @@ Here you can see a class diagram for each of the collections in the database and
 ## Security and Scalability
 
 ### Security
-From a security point of view, the only sensitive information that this application is holding would be the password of a user. In order to reduce the risk of holding this information I have made sure to only hold hashes of passwords. The hashing is done with BCrypt meaning salting of the password is included as well. Salting protects the password against rainbow table attacks and makes sure even identical passwords give a unique output. Finally, BCrypt is a slow algorithm which is good for security as it increases the time it takes to brute force the password.
+From a security point of view, the only private information that this application is holding would be the password of a user. In order to reduce the risk of holding this information I have made sure to only hold hashes of passwords. The hashing is done with BCrypt meaning salting of the password is included as well. Salting protects the password against Rainbow Table Attacks and makes sure even identical passwords give a unique output. Finally, BCrypt is a slow algorithm which is good for security as it increases the time it takes to brute force the password.
 
 There are however many areas in which we could improve the security of the application. One area is by outsourcing the login & sign up process to a 3rd party such as Google or Facebook via OAuth or OpenId. This would eliminate all risk by no longer requiring my application to store user passwords.
 
@@ -139,9 +139,9 @@ Another area of improvement would be for the application to support HTTPS instea
 ### Deployment & Scalability
 The deployment of the application takes a DevOps approach by automatically building & releasing the application whenever a merge request is merged to the master branch. This allows for quick iterations of code which can then be tested quickly.
 
-From a scalability point of view our application's MongoDB database is already scaled horizontally across 3 nodes within our eu deployment region using sharding.`(2)` Sharding increases throughput of our databases by distributing our data across multiple nodes. However, this is not the only type of scaling our database can do. If this application was to move to production, I would recommend that Cross-Region replication was enabled in order to provide data closer to customers internationally which in turn would increase performance. `(3)`
+From a scalability point of view our application's MongoDB database is already scaled horizontally across 3 nodes within our EU deployment region using sharding.`(2)` Sharding increases throughput of our databases by distributing our data across multiple nodes. However, this is not the only type of scaling our database can do. If this application was to move to production, I would recommend that Cross-Region replication was enabled in order to provide data closer to customers internationally which in turn would increase performance. `(3)`
 
-Another part of the application that would require scaling would the Node.js application itself. Currently there is 1 instance of this available (hosted in heroku) however in order to reduce load times for user's internationally, or allow more customers to visit the site, the application would need to scale. Horizontal scaling is usually cheaper however does raise one concern with the current architecture. If this application was to scale horizontally (across multiple instances) I would need a way to centralise user sessions so that every instance can access them. There are 2 ways this could be done, either by load balancing the instances (and have the load balancer store the sessions) or by storing the sessions in a database. 
+Another part of the application that would require scaling would the Node.js application itself. Currently there is 1 instance of this available (hosted in Heroku) however in order to reduce load times for user's internationally, or allow more customers to visit the site, the application would need to scale. Horizontal scaling is usually cheaper however does raise one concern with the current architecture. If this application was to scale horizontally (across multiple instances) I would need a way to centralise user sessions so that every instance can access them. There are 2 ways this could be done, either by load balancing the instances (and have the load balancer store the sessions) or by storing the sessions in a database. 
 
 One way to solve the scalability issue is to move to a serverless design. This would mean re-architecturing the app to only include API endpoints. However, by doing this I could store the site itself as a static file (in something like an S3 bucket) and have the background logic run as serverless functions (for example AWS lambda). Both S3 buckets & serverless functions combined with MongoDB cross-region replication would provide not only a highly scalable application but also would reduce the cost per user drastically.
 
@@ -151,7 +151,7 @@ On reflection, this prototype application includes all the features I set out to
 This application is only a proof of concept and hence does have limitations, such as its usability on mobile devices. The application is not fully mobile responsive and shows strange UI behaviour on smaller devices.
 
 To improve this application further I would generally improve the UI, including design consistency as well as mobile responsiveness.
-In order to do this have created a new branch in the GitHub Repository to work on the user interface. These changes won't be deployed with this prototype however you can see below a first draft of the redesigned UI:
+In order to do this, I have created a new branch in the GitHub Repository to work on the user interface. These changes won't be deployed with this prototype however you can see below a first draft of the redesigned UI:
 
 From the application side there is also one improvement I would like to implement. Currently the search bar on the history page only searches on text properties of the reading record which does not include the date. I would improve the application by either adding the date field to the search index or change the backend logic to recognise date inputs. 
 
