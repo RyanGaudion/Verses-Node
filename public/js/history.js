@@ -1,5 +1,6 @@
 //Delete Popup Delete
 const deleteClick = (id) => {
+    HideHistoryActionPopup();
     var deletePopup = document.getElementById("deletePopup");
     document.getElementById('recordIdInput').value = id;
     deletePopup.classList.remove("hidden");
@@ -39,8 +40,8 @@ document.addEventListener('click', function(e){
       var historyCard = button.parentElement.parentElement;
       
       //Set Popup ID Value
-      var RecordIDInput = document.getElementById("recordIDInput1");
-      RecordIDInput.value = historyCard.id;
+      document.getElementById("PopupViewEditID").value = historyCard.id;
+      document.getElementById('PopupDeleteButton').setAttribute('onclick','deleteClick(\''+historyCard.id+'\')')
 
 
 
@@ -57,11 +58,14 @@ document.addEventListener('click', function(e){
       //Do nothing
   }
   else{
-      popup.classList.add("hidden");
-      popupBackground.classList.add("hidden");
-
-      //Remove z-10 from all history cards:
-      Array.from(document.getElementsByClassName('historyCard')).forEach((el) => el.classList.remove('z-10'));
-
+    HideHistoryActionPopup();
   }
 });
+
+function HideHistoryActionPopup(){
+  popup.classList.add("hidden");
+  popupBackground.classList.add("hidden");
+
+  //Remove z-10 from all history cards:
+  Array.from(document.getElementsByClassName('historyCard')).forEach((el) => el.classList.remove('z-10'));
+}
