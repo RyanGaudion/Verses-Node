@@ -1,28 +1,18 @@
+//Delete Popup Delete
 const deleteClick = (id) => {
     var deletePopup = document.getElementById("deletePopup");
     document.getElementById('recordIdInput').value = id;
     deletePopup.classList.remove("hidden");
 }
 
+//Delete Popup Cancel
 const cancelClick = () => {
     var deletePopup = document.getElementById("deletePopup");
     deletePopup.classList.add("hidden");
 }
 
-window.onload = function(){
-  var divToHide = document.getElementById("filterMenu");
-  var parentDiv = document.getElementById("filterParent");
-  document.onclick = function(e){
-    if(!parentDiv.contains(e.target)){
-      //element clicked wasn't the div; hide the div
-      divToHide.classList.add("hidden");
-    }
-    else{
-      divToHide.classList.toggle("hidden");
-    }
-  };
-};
 
+//Pagination
 function pageData(count, page, limit) {
     return {
       recordCount: count,
@@ -39,3 +29,39 @@ function pageData(count, page, limit) {
       }
     };
   }
+
+//Actions Popup Tooltip
+document.addEventListener('click', function(e){
+  popup = document.getElementById("historyOptionPopup");
+  popupBackground = document.getElementById("historyOptionPopupBackground");
+  if (e.target.matches('.historyCardOptionButton, .historyCardOptionButton *')) {
+      var button = e.target.closest(".historyCardOptionButton");
+      var historyCard = button.parentElement.parentElement;
+      
+      //Set Popup ID Value
+      var RecordIDInput = document.getElementById("recordIDInput1");
+      RecordIDInput.value = historyCard.id;
+
+
+
+      historyCard.classList.add("z-10");
+      popup.classList.remove("hidden");
+
+      popup.style.left = (button.offsetLeft - popup.clientWidth + 20) +"px";
+      popup.style.top = (button.offsetTop - popup.clientHeight) +"px"; 
+
+      popupBackground.classList.remove("hidden");
+      
+  }
+  else if(e.target.matches('#historyOptionPopup, #historyOptionPopup *')){
+      //Do nothing
+  }
+  else{
+      popup.classList.add("hidden");
+      popupBackground.classList.add("hidden");
+
+      //Remove z-10 from all history cards:
+      Array.from(document.getElementsByClassName('historyCard')).forEach((el) => el.classList.remove('z-10'));
+
+  }
+});
