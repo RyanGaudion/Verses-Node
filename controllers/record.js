@@ -19,15 +19,14 @@ exports.search = async(req, res) => {
             records =  await Record.find(
                 { user_id: user._id, bookmarked: true },
                 ).skip((limit * page) - limit).limit(limit)
-                .sort({date: 'desc'});
-    
+                .sort({date: 'desc', createdAt: 'desc'})
             count = await Record.countDocuments({ user_id: user._id, bookmarked: true });
         }
         else if(filter == "notes"){
             records =  await Record.find(
                 { user_id: user._id, notes: {"$exists" : true, "$ne" : ""} },
                 ).skip((limit * page) - limit).limit(limit)
-                .sort({date: 'desc'});
+                .sort({date: 'desc', createdAt: 'desc'})
 
             count = await Record.countDocuments({ user_id: user._id, notes: {"$exists" : true, "$ne" : ""}  });
         }
@@ -37,14 +36,14 @@ exports.search = async(req, res) => {
                 { user_id: user._id, $text: { $search: searchQuery}},
                 { score: { $meta: "textScore" } }
                 ).skip((limit * page) - limit).limit(limit)
-                .sort({date: 'desc'});
+                .sort({date: 'desc', createdAt: 'desc'})
     
                 count = await Record.countDocuments({ user_id: user._id, $text: { $search: searchQuery}});
             }
             else{
                 records = await Record.find({user_id: user._id})
                 .skip((limit * page) - limit).limit(limit)
-                .sort({date: 'desc'});
+                .sort({date: 'desc', createdAt: 'desc'})
     
                 count = await Record.countDocuments({user_id: user._id});
             }

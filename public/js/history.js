@@ -70,6 +70,9 @@ function pageData(count, page, limit) {
         return this.middlePage - 1;
       },
       middlePage: page,
+      get showControls(){
+        return (this.recordCount/this.pageLimit) > 1;
+      },
       get lastPage(){
           if((this.recordCount/this.pageLimit) - this.middlePage > 0){
             return this.middlePage + 1;
