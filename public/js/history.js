@@ -12,6 +12,22 @@ const cancelClick = () => {
     deletePopup.classList.add("hidden");
 }
 
+//Handle Bookmark
+const bookmarkClick = async (id) => {
+  const bookmark = await fetch('/api/record/bookmark/?recordId='+id);
+  const record = await bookmark.json();
+  var historyCard = document.getElementById(id);
+  if(record.bookmarked){
+    historyCard.querySelector('.bookmarkIcon').classList.remove("hidden");
+    historyCard.querySelector('.bookmarkIcon').classList.add("flex");
+  }
+  else{
+    historyCard.querySelector('.bookmarkIcon').classList.remove("flex");
+    historyCard.querySelector('.bookmarkIcon').classList.add("hidden");
+  }
+  HideHistoryActionPopup();
+};
+
 
 //Pagination
 function pageData(count, page, limit) {
@@ -42,15 +58,22 @@ document.addEventListener('click', function(e){
       //Set Popup ID Value
       document.getElementById("PopupViewEditID").value = historyCard.id;
       document.getElementById('PopupDeleteButton').setAttribute('onclick','deleteClick(\''+historyCard.id+'\')')
+      document.getElementById('PopupBookmarkButton').setAttribute('onclick','bookmarkClick(\''+historyCard.id+'\')')
 
 
+      //Change Popup Text
+      document.getElementById('PopupBookmarkText').innerText = historyCard.querySelector('.bookmarkIcon').classList.contains("hidden") ? "Bookmark" : "Un-Bookmark";
+      //PopupBookmarkText
 
+      //Show Popup
       historyCard.classList.add("z-10");
       popup.classList.remove("hidden");
 
+      //Move Popup
       popup.style.left = (button.offsetLeft - popup.clientWidth + 20) +"px";
       popup.style.top = (button.offsetTop - popup.clientHeight) +"px"; 
 
+      //Show Popup Background
       popupBackground.classList.remove("hidden");
       
   }
@@ -63,6 +86,9 @@ document.addEventListener('click', function(e){
 });
 
 function HideHistoryActionPopup(){
+  popup = document.getElementById("historyOptionPopup");
+  popupBackground = document.getElementById("historyOptionPopupBackground");
+
   popup.classList.add("hidden");
   popupBackground.classList.add("hidden");
 

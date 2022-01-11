@@ -13,23 +13,19 @@
                 <!-- Date -->
                 <p class=""><%= data.date.toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric' }); %></p>
 
-                <%if (data.bookmarked) {%>
-                    <!-- Bookmarked -->
-                    <div class="h-4 w-4 bg-indigo-500 rounded-full flex items-center justify-center my-auto mb-[2.75px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                    </div>
-                <%}%>
+                <!-- Bookmarked -->
+                <div class="<%= (data.bookmarked) ? 'flex' : 'hidden' %> bookmarkIcon h-4 w-4 bg-indigo-500 rounded-full flex items-center justify-center my-auto mb-[2.75px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                </div>
 
-                <%if (data.notes) {%>
-                    <!-- Has Notes -->
-                    <div class="h-4 w-4 bg-indigo-500 rounded-full flex items-center justify-center my-auto mb-[2.75px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>                                 
-                    </div>
-                <%}%>
+                <!-- Has Notes -->
+                <div class="<%= (data.notes) ? 'flex' : 'hidden' %> notesIcon h-4 w-4 bg-indigo-500 rounded-full flex items-center justify-center my-auto mb-[2.75px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>                                 
+                </div>
             </div>
         </div>
         <!--Button-->

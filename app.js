@@ -13,6 +13,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const userController = require("./controllers/user");
 const recordController = require("./controllers/record");
 const bookApiController = require("./controllers/api/book");
+const recordApiController = require("./controllers/api/record");
 
 
 //Connect to DB
@@ -92,6 +93,7 @@ app.get("/logout", async (req, res) => {
 
 //API endpoints
 app.get("/api/book/getall", bookApiController.list);
+app.get("/api/record/bookmark", authMiddleware, recordApiController.bookmark);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
