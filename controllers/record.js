@@ -212,7 +212,7 @@ async function getCurrentBook(user){
     //Can improve later by getting last 5 books
     lastRecord = (await getLastXFullRecords(user, 1))[0];
     //If last record was end of book then choose next book - else show current book
-    if(lastRecord.chapters[lastRecord.chapters.length - 1] == lastRecord.book.chapters){
+    if(lastRecord && lastRecord.chapters[lastRecord.chapters.length - 1] == lastRecord.book.chapters){
         try{
             var nextBook = (await Book.find({number: lastRecord.book.number + 1}))[0];
             if(nextBook && nextBook.name){
@@ -223,7 +223,7 @@ async function getCurrentBook(user){
             console.log(e);
         }
     }
-    return lastRecord.book.name;
+    return lastRecord?.book?.name || "N/A";
 }
 
 async function getMostReadBook(user){
@@ -236,7 +236,7 @@ async function getMostReadBook(user){
             maxStat = stat;
         }
     });
-    return maxStat.book.name;
+    return maxStat?.book?.name || "N/A";
 }
 
 async function getLastXFullRecords(user, number){
