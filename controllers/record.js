@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Book = require('../models/Book');
 const Record = require('../models/Record');
 const { isValidObjectId } = require('mongoose');
 
@@ -171,18 +172,26 @@ exports.stats = async (req, res) => {
 
         monthCountStat = await getMonthChapterStat(user);
         testamentStat = await getTestamentChapterStat(user);
-        last30days = await getLastXdays(user, 30);
+        last30days = await getLastXDaysCount(user, 30);
+        last7days = await getLastXDaysCount(user, 7);
+        currentBookName = await getCurrentBook(user);
+
 
         oldTestamentCount = (testamentStat.find(x => x._id === "OT") === undefined) ? 0 : testamentStat.find(x => x._id === "OT").chapters;
         newTestamentCount = (testamentStat.find(x => x._id === "NT") === undefined) ? 0 : testamentStat.find(x => x._id === "NT").chapters;
-        biblePercentage = Math.round( ((+oldTestamentCount + +newTestamentCount) * 100 / 1189) * 100) / 100
+        testamentChaptersStat = [oldTestamentCount, newTestamentCount]
 
+
+        //console.log(testamentStat);
         res.render('stats', {_pageName: "stats", 
             monthCount: monthCountStat, 
-            oldTestamentCount: oldTestamentCount, 
-            newTestamentCount: newTestamentCount, 
-            biblePercentage: biblePercentage,
-            lastThirtyDays: (last30days[0] === undefined) ? 0 : last30days[0].count || 0
+            progressCount: testamentChaptersStat,
+            lastSevenDays: last7days,
+            currentBookName: currentBookName,
+            //oldTestamentCount: oldTestamentCount, 
+            //newTestamentCount: newTestamentCount, 
+            //biblePercentage: biblePercentage,
+            lastThirtyDays: last30days
         });
 
     } catch (e) {
@@ -192,6 +201,57 @@ exports.stats = async (req, res) => {
             message: JSON.parse(e),
         });
     }
+}
+
+async function getCurrentBook(user){
+    //Can improve later by getting last 5 books
+    lastRecord = (await getLastXFullRecords(user, 1))[0];
+    //If last record was end of book then choose next book - else show current book
+    if(lastRecord.chapters[lastRecord.chapters.length - 1] == lastRecord.book.chapters){
+        try{
+            var nextBook = (await Book.find({number: lastRecord.book.number + 1}))[0];
+            if(nextBook && nextBook.name){
+                return nextBook.name;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+    return lastRecord.book.name;
+}
+
+async function getLastXFullRecords(user, number){
+    var value = await Record.aggregate([
+        {
+            $match : {
+                user_id: user._id
+            }
+        },
+        {
+            $sort : {
+                date: -1,
+                createdAt: -1
+            }
+        },
+        {
+            $limit : number
+        },
+        {
+            $lookup : {
+                from: 'books',
+                localField: 'book',
+                foreignField: 'name',
+                as: 'book'
+            }
+        },
+        {
+            $addFields : {
+                book: { $arrayElemAt: ["$book", 0] }
+            }
+        }
+    ]);
+    return value;
 }
 
 async function getTestamentChapterStat(user){
@@ -245,6 +305,11 @@ async function getTestamentChapterStat(user){
             }
         }]);
     return testamentCountArray;
+}
+
+async function getLastXDaysCount(user, days){
+    var value = await getLastXdays(user, days);
+    return (value[0] === undefined) ? 0 : value[0].count || 0;
 }
 
 async function getLastXdays(user, days){
