@@ -170,11 +170,18 @@ exports.stats = async (req, res) => {
         const user = await User.findById(req.session.userID);
 
 
+        /*
         monthCountStat = await getMonthChapterStat(user);
         testamentStat = await getTestamentChapterStat(user);
         last30days = await getLastXDaysCount(user, 30);
         last7days = await getLastXDaysCount(user, 7);
         currentBookName = await getCurrentBook(user);
+        */
+
+        //80ms performance benefit
+        let [monthCountStat, testamentStat, last30days, last7days, currentBookName] = await Promise.all(
+            [getMonthChapterStat(user), getTestamentChapterStat(user), getLastXDaysCount(user, 30), getLastXDaysCount(user, 7), getCurrentBook(user)]);
+
 
 
         oldTestamentCount = (testamentStat.find(x => x._id === "OT") === undefined) ? 0 : testamentStat.find(x => x._id === "OT").chapters;
@@ -187,10 +194,7 @@ exports.stats = async (req, res) => {
             monthCount: monthCountStat, 
             progressCount: testamentChaptersStat,
             lastSevenDays: last7days,
-            currentBookName: currentBookName,
-            //oldTestamentCount: oldTestamentCount, 
-            //newTestamentCount: newTestamentCount, 
-            //biblePercentage: biblePercentage,
+            currentBookName: currentBookName,   
             lastThirtyDays: last30days
         });
 
