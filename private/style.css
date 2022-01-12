@@ -21,9 +21,33 @@ body{
     scrollbar-width: none;  /* Firefox */
 }
 
+
+
 select:invalid { @apply text-gray-500; }
  
 /* Custom Card */
 .custom-card {
     @apply 2xl:max-w-5xl lg:max-w-3xl md:max-w-2xl sm:max-w-lg max-w-md mx-auto bg-white rounded-lg shadow-xl;
+}
+
+
+/* Animations */
+
+.animation-grow {
+    @apply transition ease-in-out hover:scale-110 duration-300;
+}
+
+/* Container */
+
+.left-container {
+    @apply w-full mx-auto pl-8 sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px] 2xl:max-w-[1536px]
+}
+
+/* Pills */
+.pill {
+    @apply bg-gray-100 border-gray-500 text-gray-500 text-sm whitespace-nowrap cursor-pointer border-[1px] px-3 py-1 rounded-xl hover:bg-indigo-100 hover:border-indigo-500 hover:text-indigo-500;
+}
+
+.pill-selected {
+    @apply text-sm whitespace-nowrap border-[1px] px-3 py-1 rounded-xl cursor-pointer bg-indigo-100 border-indigo-500 text-indigo-500;
 }

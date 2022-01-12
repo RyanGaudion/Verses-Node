@@ -1,43 +1,38 @@
-<!--Entry Card-->
-<div class="custom-card px-3 py-2 md:px-6 md:py-6">
-    <!--Internal Flex-->
-    <div class="flex items-center space-x-4 justify-center md:space-x-0 md:justify-between pl-0 md:pl-3">
-        <!--Left Text Section-->
-        <div class="md:pt-1 space-y-1 md:space-y-3 w-8/12">
-            <!--Container-->
-            <h4 class="ml-1 md:ml-0 text-base md:text-xl font-normal text-gray-900">
-                <span class="hidden md:inline"><%= data.date.toLocaleString('default', { weekday: 'long'}); %></span>
-                <span><%= data.date.toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric' }); %></span>
-            </h4>
-            
-            <div class="inline-flex items-center space-x-1 md:space-x-3 max-w-full overflow-x-scroll no-scrollbar">
-                <p class="text-xs font-normal md:text-base text-white bg-gradient-to-r from-indigo-500 to-indigo-500 px-2 md:px-3.5 py-0.5 rounded-full whitespace-nowrap"><%= data.book %> <%= data.chapters.length > 1 ? (data.chapters[0].toString() + "-" + data.chapters[data.chapters.length - 1]) : data.chapters[0].toString() %></p>
+<!--History Card-->
+<div id="<%= data._id %>" class="historyCard bg-white w-full rounded-lg py-2 px-4">
+    <div class="flex flex-row justify-between">
+        <!--Title & Data-->
+        <div class="flex flex-col space-y-0">
+            <h2 class="font-medium text-lg text-gray-800 -mb-1"><%= data.book %> <%= data.chapters.length > 1 ? (data.chapters[0].toString() + "-" + data.chapters[data.chapters.length - 1]) : data.chapters[0].toString() %></h2>
+            <!-- Date + icons section-->
+            <div class="flex flex-row text-sm text-gray-500 justify-start space-x-1">
+                <!-- Date icon-->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 mb-[2.75px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <!-- Date -->
+                <p class=""><%= data.date.toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric' }); %></p>
+
+                <!-- Bookmarked -->
+                <div class="<%= (data.bookmarked) ? 'flex' : 'hidden' %> bookmarkIcon h-4 w-4 bg-indigo-500 rounded-full flex items-center justify-center my-auto mb-[2.75px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                </div>
+
+                <!-- Has Notes -->
+                <div class="<%= (data.notes) ? 'flex' : 'hidden' %> notesIcon h-4 w-4 bg-indigo-500 rounded-full flex items-center justify-center my-auto mb-[2.75px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>                                 
+                </div>
             </div>
         </div>
-        <!--Right Button Section-->
-        <div class="flex space-x-2 md:space-x-4 items-center flex-row">
-            <form action="/record" method="GET">
-                <input name="recordId" hidden value="<%= data._id %>"/>
-                <!--View-->
-                <button type="submit" class="inline-flex items-center px-3 md:px-4 py-1 md:py-2 border border-transparent rounded-md shadow-sm text-xs md:text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-                    <!-- Heroicon name: solid/eye -->
-                    <svg class="-ml-1 mr-2 h-4 w-4 md:h-5 md:w-5"  xmlns="http://www.w3.org/2000/svg"viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                    </svg>
-                    View
-                </button>
-            </form>
-
-            <!--Delete-->
-            <button type="button" onclick="deleteClick('<%= data._id %>')" class="inline-flex items-center px-3 md:px-4 py-1 md:py-2 border border-transparent rounded-md shadow-sm text-xs md:text-sm font-medium text-white bg-red-500 hover:bg-red-600">
-                <!-- Heroicon name: trash -->
-                <svg class="-ml-1 mr-2 h-4 w-4 md:h-5 md:w-5" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                Delete
-            </button>
-        </div>
+        <!--Button-->
+        <button class="w-10 historyCardOptionButton">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+            </svg>
+        </button>
     </div>
-    
 </div>

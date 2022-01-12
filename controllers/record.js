@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Book = require('../models/Book');
 const Record = require('../models/Record');
 const { isValidObjectId } = require('mongoose');
 
@@ -19,15 +20,14 @@ exports.search = async(req, res) => {
             records =  await Record.find(
                 { user_id: user._id, bookmarked: true },
                 ).skip((limit * page) - limit).limit(limit)
-                .sort({date: 'desc'});
-    
+                .sort({date: 'desc', createdAt: 'desc'})
             count = await Record.countDocuments({ user_id: user._id, bookmarked: true });
         }
         else if(filter == "notes"){
             records =  await Record.find(
                 { user_id: user._id, notes: {"$exists" : true, "$ne" : ""} },
                 ).skip((limit * page) - limit).limit(limit)
-                .sort({date: 'desc'});
+                .sort({date: 'desc', createdAt: 'desc'})
 
             count = await Record.countDocuments({ user_id: user._id, notes: {"$exists" : true, "$ne" : ""}  });
         }
@@ -37,14 +37,14 @@ exports.search = async(req, res) => {
                 { user_id: user._id, $text: { $search: searchQuery}},
                 { score: { $meta: "textScore" } }
                 ).skip((limit * page) - limit).limit(limit)
-                .sort({date: 'desc'});
+                .sort({date: 'desc', createdAt: 'desc'})
     
                 count = await Record.countDocuments({ user_id: user._id, $text: { $search: searchQuery}});
             }
             else{
                 records = await Record.find({user_id: user._id})
                 .skip((limit * page) - limit).limit(limit)
-                .sort({date: 'desc'});
+                .sort({date: 'desc', createdAt: 'desc'})
     
                 count = await Record.countDocuments({user_id: user._id});
             }
@@ -170,20 +170,33 @@ exports.stats = async (req, res) => {
         const user = await User.findById(req.session.userID);
 
 
+        /*
         monthCountStat = await getMonthChapterStat(user);
         testamentStat = await getTestamentChapterStat(user);
-        last30days = await getLastXdays(user, 30);
+        last30days = await getLastXDaysCount(user, 30);
+        last7days = await getLastXDaysCount(user, 7);
+        currentBookName = await getCurrentBook(user);
+        */
 
+        //80ms performance benefit
+        let [monthCountStat, testamentStat, mostReadBook, last30days, last7days, currentBookName] = await Promise.all(
+            [getMonthChapterStat(user), getTestamentChapterStat(user), getMostReadBook(user), getLastXDaysCount(user, 30), getLastXDaysCount(user, 7), getCurrentBook(user)]);
+
+        
+        
         oldTestamentCount = (testamentStat.find(x => x._id === "OT") === undefined) ? 0 : testamentStat.find(x => x._id === "OT").chapters;
         newTestamentCount = (testamentStat.find(x => x._id === "NT") === undefined) ? 0 : testamentStat.find(x => x._id === "NT").chapters;
-        biblePercentage = Math.round( ((+oldTestamentCount + +newTestamentCount) * 100 / 1189) * 100) / 100
+        testamentChaptersStat = [oldTestamentCount, newTestamentCount]
 
+
+        //console.log(testamentStat);
         res.render('stats', {_pageName: "stats", 
             monthCount: monthCountStat, 
-            oldTestamentCount: oldTestamentCount, 
-            newTestamentCount: newTestamentCount, 
-            biblePercentage: biblePercentage,
-            lastThirtyDays: (last30days[0] === undefined) ? 0 : last30days[0].count || 0
+            progressCount: testamentChaptersStat,
+            lastSevenDays: last7days,
+            currentBookName: currentBookName,
+            mostReadBook: mostReadBook,
+            lastThirtyDays: last30days
         });
 
     } catch (e) {
@@ -195,6 +208,119 @@ exports.stats = async (req, res) => {
     }
 }
 
+async function getCurrentBook(user){
+    //Can improve later by getting last 5 books
+    lastRecord = (await getLastXFullRecords(user, 1))[0];
+    //If last record was end of book then choose next book - else show current book
+    if(lastRecord.chapters[lastRecord.chapters.length - 1] == lastRecord.book.chapters){
+        try{
+            var nextBook = (await Book.find({number: lastRecord.book.number + 1}))[0];
+            if(nextBook && nextBook.name){
+                return nextBook.name;
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+    return lastRecord.book.name;
+}
+
+async function getMostReadBook(user){
+    var bookStats = await getBookChapterStat(user);
+    //stat = chapters (int) & book (object)
+    var maxStat = bookStats[0];
+    bookStats.forEach(function(stat){
+        var percentage = stat.chapters / stat.book.chapters;
+        if(percentage >=  maxStat.chapters / maxStat.book.chapters){
+            maxStat = stat;
+        }
+    });
+    return maxStat.book.name;
+}
+
+async function getLastXFullRecords(user, number){
+    var value = await Record.aggregate([
+        {
+            $match : {
+                user_id: user._id
+            }
+        },
+        {
+            $sort : {
+                date: -1,
+                createdAt: -1
+            }
+        },
+        {
+            $limit : number
+        },
+        {
+            $lookup : {
+                from: 'books',
+                localField: 'book',
+                foreignField: 'name',
+                as: 'book'
+            }
+        },
+        {
+            $addFields : {
+                book: { $arrayElemAt: ["$book", 0] }
+            }
+        }
+    ]);
+    return value;
+}
+
+
+//Unique - if set to yes will count multiple of same chapter only once
+async function getBookChapterStat(user, unique = false){
+    var bookCountArray = await Record.aggregate( [
+        {
+            $match : {
+                user_id: user._id
+            }
+        },
+        {
+            $lookup : {
+                from: 'books',
+                localField: 'book',
+                foreignField: 'name',
+                as: 'book'
+            }
+        },
+        {
+            $project : {
+                book: { $arrayElemAt: ["$book", 0] },
+                chapters: "$chapters"
+            }
+        },
+        {
+            $group : {
+                _id: { "book": "$book" },
+                chapters: { $push: "$chapters" },
+                booksInfo: {"$addToSet": "$book"}
+            }
+        },
+        {
+            $project : {
+                chapters: {
+                    $size : {
+                        $reduce: {
+                            input: "$chapters",
+                            initialValue: [],
+                            in: unique ? { $setUnion: [ "$$value", "$$this" ] } : { $concatArrays: [ "$$value", "$$this" ] }
+                        }
+                    }
+                  },
+                  book: {$arrayElemAt: ["$booksInfo", 0]}
+            }
+        }
+    ]);
+    return bookCountArray;
+}
+
+//Counts multiple of same chapter as 1
 async function getTestamentChapterStat(user){
     var testamentCountArray = await Record.aggregate( [
         {
@@ -246,6 +372,11 @@ async function getTestamentChapterStat(user){
             }
         }]);
     return testamentCountArray;
+}
+
+async function getLastXDaysCount(user, days){
+    var value = await getLastXdays(user, days);
+    return (value[0] === undefined) ? 0 : value[0].count || 0;
 }
 
 async function getLastXdays(user, days){

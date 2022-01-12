@@ -6,139 +6,216 @@
     <script src="https://unpkg.com/alpinejs@3.7.0/dist/cdn.min.js" defer></script>
     <script src="/js/stats.js"></script>
 </head>
-<body>
-    <div class="min-h-full0">
-        <%- include('common/header'); -%>
+<body class="min-h-full">
+  <%- include('common/header'); -%>
+  <div class="container my-10 font-sans">
+    <div class="flex flex-col space-y-6 pb-6">
 
-        <div class="px-4 py-8 md:py-14 space-y-6 lg:container lg:space-y-6">
-            <!--Stat Container-->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="px-6 py-6 bg-white rounded-lg shadow-xl flex flex-row p-6 justify-between border-2 bg-gradient-to-r from-indigo-700 via-indigo-800 to-indigo-900 border-indigo-500">
-                    <div class="my-auto">
-                        <div class="text-lg text-indigo-300">Old Testament Chapters</div>
-                        <div>
-                            <span class="text-indigo-100 text-4xl"><%= oldTestamentCount %> </span>
-                            <span class="text-indigo-200 text-2xl">of 1024 </span>
-                        </div>
-                    </div>
-                    <!--https://icon-sets.iconify.design/whh/mayanpyramid/-->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-indigo-300 my-auto h-14 w-14" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1.34em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 768">
-                        <path d="M992 768H704L576 0h96q13 0 22.5 9.5T704 32v64q0 13-9.5 22.5T672 128h64q13 0 22.5 9.5T768 160v64q0 13-9.5 22.5T736 256h64q13 0 22.5 9t9.5 23v64q0 13-9.5 22.5T800 384h64q13 0 22.5 9t9.5 23v64q0 13-9.5 22.5T864 512h64q13 0 22.5 9t9.5 23v64q0 13-9.5 22.5T928 640h64q13 0 22.5 9t9.5 23v64q0 13-9.5 22.5T992 768zm-608 0L448 0h128l64 768H384zm-352 0q-13 0-22.5-9.5T0 736v-64q0-13 9.5-22.5T32 640h64q-13 0-22.5-9.5T64 608v-64q0-13 9.5-22.5T96 512h64q-13 0-22.5-9.5T128 480v-64q0-13 9.5-22.5T160 384h64q-13 0-22.5-9.5T192 352v-64q0-13 9.5-22.5T224 256h64q-13 0-22.5-9.5T256 224v-64q0-13 9.5-22.5T288 128h64q-13 0-22.5-9.5T320 96V32q0-13 9.5-22.5T352 0h96L320 768H32z" fill="currentColor"/>
-                    </svg>
-                </div>
+      <!--Overview Grid-->
+      <div class="grid gap-4 grid-cols-2 grid-rows-2 lg:grid-cols-4 lg:grid-rows-1">
+        <!-- Chapters this week -->
+        <div class="h-fit w-full bg-white rounded-xl">
+          <div class="flex flex-col my-4 ml-4 mr-2 space-y-3">
+              <!--icon & title-->
+              <div class="flex flex-row space-x-2">
+                  <div class="h-7 w-7 min-w-[28px] bg-indigo-300 rounded-full flex items-center justify-center my-auto">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                  </div>
+                  <h2 class="my-auto leading-3 font-medium text-sm text-gray-600">This Week</h2>
+              </div>
+              <!-- stat -->
+              <p class="text-gray-600 leading-5 font-normal text-base"><%= lastSevenDays %> Chapters</p>
+          </div>
+      </div>
+      <!-- Current Book (last book to be read) -->
+      <div class="h-fit w-full bg-white rounded-xl">
+          <div class="flex flex-col my-4 ml-4 mr-2 space-y-3">
+              <!--icon & title-->
+              <div class="flex flex-row space-x-2">
+                  <div class="h-7 w-7 min-w-[28px] bg-indigo-300 rounded-full flex items-center justify-center my-auto">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                  </div>
+                  <h2 class="my-auto leading-3 font-medium text-sm text-gray-600">
+                      Current 
+                      <span class="hidden md:inline"> Book</span>
+                  </h2>
+              </div>
+              <!-- stat -->
+              <p class="text-gray-600 leading-5 font-normal text-base"><%= currentBookName %></p>
 
-                <div class="px-6 py-6 bg-white rounded-lg shadow-xl sm:col-span-2 flex flex-row p-6 justify-between border-2 bg-gradient-to-r from-indigo-700 via-indigo-800 to-indigo-900 border-indigo-500">
-                    <div class="my-auto">
-                        <div class="text-lg text-indigo-300">Bible Total</div>
-                        <div class="text-4xl">
-                            <span class="text-indigo-100"><%= biblePercentage %>%</span>
-                        </div>
-                    </div>
-                    <!--https://icons.getbootstrap.com/icons/book/-->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-indigo-300 my-auto h-14 w-14" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+          </div>
+      </div>
+      <!-- Chapters in the last 30 days -->
+      <div class="h-fit w-full bg-white rounded-xl">
+          <div class="flex flex-col my-4 ml-4 mr-2 space-y-3">
+              <!--icon & title-->
+              <div class="flex flex-row space-x-2">
+                  <div class="h-7 w-7 min-w-[28px] bg-indigo-300 rounded-full flex items-center justify-center my-auto">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
-                </div>
-                <div class="px-6 py-6 bg-white rounded-lg shadow-xl sm:col-span-2 flex flex-row p-6 justify-between border-2 bg-gradient-to-r from-indigo-700 via-indigo-800 to-indigo-900 border-indigo-500">
-                    <div class="my-auto">
-                        <div class="text-lg text-indigo-300">Last 30 days:</div>
-                        <div>
-                            <span class="text-indigo-100 text-4xl"><%= lastThirtyDays %> </span>
-                            <span class="text-indigo-200 text-2xl">Chapters </span>
-                        </div>
-                    </div>
-                    <!--https://icon-sets.iconify.design/gridicons/next-page/-->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-indigo-300 my-auto h-16 w-16" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                        <path d="M18 8h-8V6h8v2zm4-4v8l-6 6H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-2 0H8v12h6v-4a2 2 0 0 1 2-2h4V4zM4 6a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2H4V6z" fill="currentColor"/>
+                  </div>
+                  <h2 class="my-auto leading-3 font-medium text-sm text-gray-600">
+                      <span class="hidden md:inline">Last </span>
+                      30 Days
+                  </h2>
+              </div>
+              <!-- stat -->
+              <p class="text-gray-600 leading-5 font-normal text-base"><%= lastThirtyDays %> Chapters</p>
+          </div>
+      </div>
+      <!-- Most read book -->
+      <div class="h-fit w-full bg-white rounded-xl">
+          <div class="flex flex-col my-4 ml-4 mr-2 space-y-3">
+              <!--icon & title-->
+              <div class="flex flex-row space-x-2">
+                  <div class="h-7 w-7 min-w-[28px] bg-indigo-300 rounded-full flex items-center justify-center my-auto">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11l7-7 7 7M5 19l7-7 7 7" />
+                      </svg>
+                  </div>
+                  <h2 class="my-auto leading-3 font-medium text-sm text-gray-600">
+                      Most Read
+                      <span class="hidden md:inline"> Book</span>
+                  </h2>
+              </div>
+              <!-- stat -->
+              <p class="text-gray-600 leading-5 font-normal text-base"><%= mostReadBook %></p>
+          </div>
+      </div>
+    </div>
+
+    <!-- Graphs grid-->
+    <div class="flex flex-col space-y-6 space-x-0 lg:flex-row lg:space-y-0 lg:space-x-4">
+      <!-- Progress Chart-->
+      <div class="h-fit w-full bg-white rounded-xl">
+          <div x-data="progressGraphApp(<%= JSON.stringify(progressCount) %>)" class="flex flex-col m-4 pr-4 pb-4 space-y-6">
+              <!--icon & title-->
+              <div class="flex flex-row space-x-2">
+                  <div class="h-7 w-7 min-w-[28px] bg-indigo-300 rounded-full flex items-center justify-center my-auto">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                      </svg>
+                  </div>
+                  <h2 class="my-auto leading-3 font-medium text-sm text-gray-600">Progress</h2>
+              </div>
+              <!-- old testament -->
+              <div class="flex flex-col space-y-2">
+                  <!--Title & Total-->
+                  <div class="flex flex-row w-full justify-between">
+                      <h3 class="text-xs text-gray-600 font-medium">Old Testament</h3>
+                      <p class="text-xs text-gray-400 font-medium" x-text="`${OTPercentageText}%`"></p>
+                  </div>
+                  <!--Graph row-->
+                  <div class="w-full relative">
+                      <div class="h-2 bg-fuchsia-600 z-10 absolute rounded-full" :style="`width: ${OTPercentage}%`"></div>
+                      <div class="h-2 w-full bg-gray-100 absolute rounded-full"></div>
+                  </div>
+              </div>
+              <!-- new testament -->
+              <div class="flex flex-col space-y-2">
+                  <!--Title & Total-->
+                  <div class="flex flex-row w-full justify-between">
+                      <h3 class="text-xs text-gray-600 font-medium">New Testament</h3>
+                      <p class="text-xs text-gray-400 font-medium" x-text="`${NTPercentageText}%`"></p>
+                  </div>
+                  <!--Graph row-->
+                  <div class="w-full relative">
+                      <div class="h-2 bg-purple-600 z-10 absolute rounded-full" :style="`width: ${NTPercentage}%`"></div>
+                      <div class="h-2 w-full bg-gray-100 absolute rounded-full"></div>
+                  </div>
+              </div>
+              <!-- bible testament -->
+              <div class="flex flex-col space-y-2">
+                  <!--Title & Total-->
+                  <div class="flex flex-row w-full justify-between">
+                      <h3 class="text-xs text-gray-600 font-medium">Bible</h3>
+                      <p class="text-xs text-gray-400 font-medium" x-text="`${TotalPercentageText}%`"></p>
+                  </div>
+                  <!--Graph row-->
+                  <div class="w-full relative">
+                      <div class="h-2 bg-indigo-600 z-10 absolute rounded-full" :style="`width: ${TotalPercentage}%`"></div>
+                      <div class="h-2 w-full bg-gray-100 absolute rounded-full"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!--Monthly Chart-->
+      <div class="h-fit w-full bg-white rounded-xl">
+        <div x-data="yearGraphApp(<%= JSON.stringify(monthCount) %>)" x-cloak class="antialiased p-6">
+            
+            <!--icon & title-->
+            <div class="flex flex-row space-x-2">
+                <div class="h-7 w-7 min-w-[28px] bg-indigo-300 rounded-full flex items-center justify-center my-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                 </div>
-                <div class="px-6 py-6 bg-white rounded-lg shadow-xl flex flex-row p-6 justify-between border-2 bg-gradient-to-r from-indigo-700 via-indigo-800 to-indigo-900 border-indigo-500">
-                    <div class="my-auto">
-                        <div class="text-lg text-indigo-300">New Testament Chapters</div>
-                        <div>
-                            <span class="text-indigo-100 text-4xl"><%= newTestamentCount %> </span>
-                            <span class="text-indigo-200 text-2xl">of 678 </span>
-                        </div>
-                    </div>
-                    <!--https://icon-sets.iconify.design/la/cross/-->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-indigo-300 my-auto h-16 w-16" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
-                        <path d="M13 3v6H7v6h6v14h6V15h6V9h-6V3zm2 2h2v6h6v2h-6v14h-2V13H9v-2h6z" fill="currentColor"/>
-                    </svg>
-                </div>
-                
+                <h2 class="my-auto leading-3 font-medium text-sm text-gray-600">Chapters per month</h2>
             </div>
 
-            <!--Graphs-->
-            <div x-data="yearGraphApp(<%= JSON.stringify(monthCount) %>)" x-cloak class="antialiased px-4">
-                <div class="max-w-lg mx-auto">
-                  <div class="shadow p-6 rounded-lg bg-white">
-                    <div class="md:flex md:justify-between md:items-center">
-                      <div>
-                        <h2 class="text-xl text-gray-800 font-bold leading-tight">Chapters Read</h2>
-                        <p class="mb-2 text-gray-600 text-sm">Monthly</p>
-                      </div>
-            
-                      <!-- Legends -->
-                      <div class="mb-4">
-                        <div class="flex items-center">
-                          <div class="w-2 h-2 bg-blue-600 mr-2 rounded-full"></div>
-                          <div class="text-sm text-gray-700">Chapters</div>
-                        </div>
-                      </div>
+            <!--Bar section-->
+            <div class="line my-8 relative">
+
+            <!-- Tooltip -->
+            <template x-if="tooltipOpen == true">
+                <div x-ref="tooltipContainer" class="p-0 m-0 z-20 shadow-lg rounded-lg absolute h-auto block"
+                    :style="`bottom: ${tooltipY}px; left: ${tooltipX}px`"
+                    >
+                <div class="shadow-xs rounded-lg bg-white p-2">
+                    <div class="flex items-center justify-between text-sm">
+                    <div>Chapters:</div>
+                    <div class="font-bold ml-2">
+                        <span x-html="tooltipContent"></span>
                     </div>
-            
-            
-                    <div class="line my-8 relative">
-                      <!-- Tooltip -->
-                      <template x-if="tooltipOpen == true">
-                        <div x-ref="tooltipContainer" class="p-0 m-0 z-10 shadow-lg rounded-lg absolute h-auto block"
-                             :style="`bottom: ${tooltipY}px; left: ${tooltipX}px`"
-                             >
-                          <div class="shadow-xs rounded-lg bg-white p-2">
-                            <div class="flex items-center justify-between text-sm">
-                              <div>Sales:</div>
-                              <div class="font-bold ml-2">
-                                <span x-html="tooltipContent"></span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </template>
-            
-                      <!-- Bar Chart -->
-                      <div class="flex -mx-2 items-end mb-2">
-                        <template x-for="data in chartData">
-            
-                          <div class="px-2 w-1/6">
-                            <div :style="`height: ${(chartHeight / maxValue) * data}px`" 
-                                 class="transition ease-in duration-200 bg-blue-600 hover:bg-blue-400 relative"
-                                 @mouseenter="showTooltip($event); tooltipOpen = true" 
-                                 @mouseleave="hideTooltip($event)"
-                                 >
-                              <div x-text="data" class="rotate-90 md:rotate-0 text-center absolute top-0 left-0 right-0 -mt-8 md:-mt-6 text-gray-800 text-sm"></div>
-                            </div>
-                          </div>
-            
-                        </template>
-                      </div>
-            
-                      <!-- Labels -->
-                      <div class="border-t border-gray-400 mx-auto" :style="`height: 1px; width: ${ 100 - 1/chartData.length*100 + 3}%`"></div>
-                      <div class="flex -mx-2 items-end">
-                        <template x-for="data in labels">
-                          <div class="px-2 w-1/6">
-                            <div class="bg-red-600 relative">
-                              <div class="text-center absolute top-0 left-0 right-0 h-2 -mt-px bg-gray-400 mx-auto" style="width: 1px"></div>
-                              <div x-text="data" class="rotate-90 md:rotate-0 text-center absolute top-0 left-0 right-0 mt-3 text-gray-700 text-sm"></div>
-                            </div>
-                          </div>
-                        </template>	
-                      </div>
-            
                     </div>
-                  </div>
                 </div>
-              </div>         
-    </div>
+                </div>
+            </template>
+    
+            <!-- Bar Chart -->
+            <div class="flex -mx-2 items-end mb-2">
+                <template x-for="data in chartData">
+    
+                <div class="px-2 w-1/6">
+                    <div @mouseenter="showTooltip($event); tooltipOpen = true" 
+                          @mouseleave="hideTooltip($event)" 
+                          :style="`height: ${chartHeight}px`"
+                          class="transition ease-in duration-200 relative group">
+                        <div :style="`height: ${((chartHeight / maxValue) * data) + 0}px`" 
+                            class="w-2 md:w-3 bg-indigo-600 group-hover:bg-indigo-400 z-10 absolute rounded-full bottom-0 left-0 right-0 mx-auto"></div>
+                        <div class="w-2 md:w-3 h-full bg-gray-100 absolute rounded-full bottom-0 left-0 right-0 mx-auto"></div>
+                        <div x-text="data" x-show="0 != 0" class="w-2 md:w-3 text-center absolute top-0 left-0 right-0 mx-auto -mt-6 text-xs text-gray-400 font-medium"></div>
+
+                    </div>    
+
+                    </div>
+                </div>
+    
+                </template>
+            </div>
+    
+            <!-- Labels -->
+            <div class="border-t border-gray-400 mx-auto" :style="`height: 1px; width: ${ 100 - 1/chartData.length*100 + 3}%`"></div>
+            <div class="flex -mx-2 items-end">
+                <template x-for="data in labels">
+                <div class="px-2 w-1/6">
+                    <div class="relative">
+                    <div class="text-center absolute top-0 left-0 right-0 h-2 -mt-px bg-gray-400 mx-auto" style="width: 1px"></div>
+                    <div x-text="data" class="rotate-90 text-center absolute top-0 left-0 right-0 mt-3 text-gray-600 text-xs font-medium"></div>
+                    </div>
+                </div>
+                </template>	
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
 </body>
 </html>
