@@ -12,9 +12,9 @@ My application provides a way to keep track of your progress through the Bible a
 # System Overview
 This application is built with an MVC (Model, View, Controller) architecture, using Node.js for the backend, connecting to a MongoDB database while using EJS, Tailwind CSS & AlpineJS for the views.
 
-The reason for using a non-relational database like MongoDB was due to the read & write simplicity it provides as well as the performance benefits too. One downside of non-relational & No-SQL databases is data integrity however this application does not require high data consistency making MongoDB a perfect choice.
+The reason for using a non-relational database like MongoDB was due to the read & write simplicity it provides as well as the performance benefits too `(5)` One downside of non-relational & NoSQL databases is data integrity however this application does not require high data consistency making MongoDB a perfect choice.
 
-The benefits of Tailwind CSS (a CSS Utility Framework) & AlpineJS (A lightweight framework for adding UI behaviour) is the performance they provide as well as the huge amount of code that they abstract away. They allow me to quickly iterate my design without having to spend hours writing lots of UI code. The performance benefits are outstanding too, rating my website 100/100 on Google Lighthouse tests is a result of their small size. Alpine JS is 15kb and TailwindCSS is 30kb which combined is smaller than BoostrapCSS on its own (60kb).
+The benefits of Tailwind CSS (a CSS Utility Framework) & AlpineJS (A lightweight framework for adding UI behaviour) is the performance they provide as well as the huge amount of code that they abstract away. They allow me to quickly iterate my design without having to spend hours writing lots of UI code. The performance benefits are outstanding too, rating my website 100/100 on Google Lighthouse tests is a result of their small size. Alpine JS is 15kb and TailwindCSS is 30kb which combined is smaller than BoostrapCSS on its own (58kb) `(4)`.
 
 There are 2 main parts of the application, the reading history & the stats:
 
@@ -132,7 +132,7 @@ Here you can see a class diagram for each of the collections in the database and
 ### Security
 From a security point of view, the only private information that this application is holding would be the password of a user. In order to reduce the risk of holding this information I have made sure to only hold hashes of passwords. The hashing is done with BCrypt meaning salting of the password is included as well. Salting protects the password against Rainbow Table Attacks and makes sure even identical passwords give a unique output. Finally, BCrypt is a slow algorithm which is good for security as it increases the time it takes to brute force the password.
 
-There are however many areas in which we could improve the security of the application. One area is by outsourcing the login & sign up process to a 3rd party such as Google or Facebook via OAuth or OpenId. This would eliminate all risk by no longer requiring my application to store user passwords.
+There are however many areas in which we could improve the security of the application. One area is by outsourcing the login & sign up process to a 3rd party such as Google or Facebook via OAuth or OpenId. This would eliminate all risk by no longer requiring my application to store user passwords. `(7)`
 
 Another area of improvement would be for the application to support HTTPS instead of just HTTP which in turn would automatically encrypt traffic in motion to & from our server. The reason this is not enabled is simply due to a limitation of Heroku's free tier.
 
@@ -143,15 +143,14 @@ From a scalability point of view our application's MongoDB database is already s
 
 Another part of the application that would require scaling would the Node.js application itself. Currently there is 1 instance of this available (hosted in Heroku) however in order to reduce load times for user's internationally, or allow more customers to visit the site, the application would need to scale. Horizontal scaling is usually cheaper however does raise one concern with the current architecture. If this application was to scale horizontally (across multiple instances) I would need a way to centralise user sessions so that every instance can access them. There are 2 ways this could be done, either by load balancing the instances (and have the load balancer store the sessions) or by storing the sessions in a database. 
 
-One way to solve the scalability issue is to move to a serverless design. This would mean re-architecturing the app to only include API endpoints. However, by doing this I could store the site itself as a static file (in something like an S3 bucket) and have the background logic run as serverless functions (for example AWS lambda). Both S3 buckets & serverless functions combined with MongoDB cross-region replication would provide not only a highly scalable application but also would reduce the cost per user drastically.
+One way to solve the scalability issue is to move to a serverless design. `(6)` This would mean re-architecturing the app to only include API endpoints. However, by doing this I could store the site itself as a static file (in something like an S3 bucket) and have the background logic run as serverless functions (for example AWS lambda). Both S3 buckets & serverless functions combined with MongoDB cross-region replication would provide not only a highly scalable application but also would reduce the cost per user drastically.
 
 # Conclusion and Reflection
 On reflection, this prototype application includes all the features I set out to include plus more (bookmarking & notes). It fulfills its original goal of allowing me to track my progress through the Bible.
 
 This application is only a proof of concept and hence does have limitations, such as its usability on mobile devices. The application is not fully mobile responsive and shows strange UI behaviour on smaller devices.
 
-To improve this application further I would generally improve the UI, including design consistency as well as mobile responsiveness.
-In order to do this, I have created a new branch in the GitHub Repository to work on the user interface. These changes won't be deployed with this prototype however you can see below a first draft of the redesigned UI:
+To improve this application further I would generally improve the UI, including design consistency as well as mobile responsiveness. In order to do this, I have created a new branch in the GitHub Repository to work on the user interface. These changes won't be deployed with this prototype however you can see below a first draft of the redesigned UI.
 
 From the application side there is also one improvement I would like to implement. Currently the search bar on the History Page only searches on text properties of the reading record which does not include the date. I would improve the application by either adding the date field to the search index or change the backend logic to recognise date inputs. 
 
@@ -161,3 +160,7 @@ From the application side there is also one improvement I would like to implemen
 1. Dexter, Allison. “How Many Words Are in the Bible?” Word Counter, https://wordcounter.io/blog/how-many-words-are-in-the-bible/.
 2. MongoDB. “How to Scale MongoDB.” MongoDB, https://www.mongodb.com/basics/scaling.
 3. MongoDB. “New to MongoDB Atlas: Cross-Region Replication, New Instance Sizes | MongoDB Blog.” MongoDB, 2017, https://www.mongodb.com/blog/post/new-to-mongodb-atlas-cross-region-replication-new-instance-sizes.
+4. Bundlephobia. “Bootstrap V5.0.0 ❘ Bundlephobia.” Bundlephobia.com, 2021, https://bundlephobia.com/package/bootstrap@5.0.0
+5. Kriščiūnas, Albertas. “Benefits of NoSQL · Devbridge.” Benefits of NoSQL · Devbridge, 2014, https://www.devbridge.com/articles/benefits-of-nosql/.
+6. Cloudflare. “Why Use Serverless Computing? | Pros and Cons of Serverless.” Cloudflare, 2021, https://www.cloudflare.com/en-gb/learning/serverless/why-use-serverless/.
+7. ISUcorp. “4 Benefits of Using Third-Party Authentication.” ISU Corp | Custom Software Solutions, 2021, https://www.isucorp.ca/blog/benefits-of-using-third-party-authentication.
