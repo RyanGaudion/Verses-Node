@@ -8,6 +8,7 @@ const expressSession = require("express-session");
 const User = require('./models/User');
 app.set("view engine", "ejs");
 
+const PORT = process.env.PORT || 8080;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 const userController = require("./controllers/user");
@@ -95,7 +96,6 @@ app.get("/logout", async (req, res) => {
 app.get("/api/book/getall", bookApiController.list);
 app.get("/api/record/bookmark", authMiddleware, recordApiController.bookmark);
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Verses app listening at http://localhost:${PORT}`);
 });

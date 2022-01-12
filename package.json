@@ -21,13 +21,13 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "npm run build:css && node app.js",
+    "start": "npm run prod:css && node app.js",
     "dev": "npm-run-all -p dev:tailwind dev:run",
     "dev:run": "supervisor app.js",
     "dev:tailwind": "tailwindcss -i private/style.css -o public/css/style.css --watch",
-    "build": "npm-run-all build:css build:run",
-    "build:run": "node app.js",
-    "build:css": "tailwindcss -i private/style.css -o public/css/style.css --minify",
+    "prod": "npm-run-all prod:css prod:run",
+    "prod:run": "node app.js",
+    "prod:css": "tailwindcss -i private/style.css -o public/css/style.css --minify",
     "seed-prod": "cross-env NODE_ENV=production node seeder.js",
     "seed-dev": "node seeder.js"
   },
