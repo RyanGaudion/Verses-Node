@@ -179,11 +179,11 @@ exports.stats = async (req, res) => {
         */
 
         //80ms performance benefit
-        let [monthCountStat, testamentStat, last30days, last7days, currentBookName] = await Promise.all(
-            [getMonthChapterStat(user), getTestamentChapterStat(user), getLastXDaysCount(user, 30), getLastXDaysCount(user, 7), getCurrentBook(user)]);
+        let [monthCountStat, testamentStat, mostReadBook, last30days, last7days, currentBookName] = await Promise.all(
+            [getMonthChapterStat(user), getTestamentChapterStat(user), getMostReadBook(user), getLastXDaysCount(user, 30), getLastXDaysCount(user, 7), getCurrentBook(user)]);
 
-
-
+        
+        
         oldTestamentCount = (testamentStat.find(x => x._id === "OT") === undefined) ? 0 : testamentStat.find(x => x._id === "OT").chapters;
         newTestamentCount = (testamentStat.find(x => x._id === "NT") === undefined) ? 0 : testamentStat.find(x => x._id === "NT").chapters;
         testamentChaptersStat = [oldTestamentCount, newTestamentCount]
@@ -194,7 +194,8 @@ exports.stats = async (req, res) => {
             monthCount: monthCountStat, 
             progressCount: testamentChaptersStat,
             lastSevenDays: last7days,
-            currentBookName: currentBookName,   
+            currentBookName: currentBookName,
+            mostReadBook: mostReadBook,
             lastThirtyDays: last30days
         });
 
@@ -223,6 +224,19 @@ async function getCurrentBook(user){
         }
     }
     return lastRecord.book.name;
+}
+
+async function getMostReadBook(user){
+    var bookStats = await getBookChapterStat(user);
+    //stat = chapters (int) & book (object)
+    var maxStat = bookStats[0];
+    bookStats.forEach(function(stat){
+        var percentage = stat.chapters / stat.book.chapters;
+        if(percentage >=  maxStat.chapters / maxStat.book.chapters){
+            maxStat = stat;
+        }
+    });
+    return maxStat.book.name;
 }
 
 async function getLastXFullRecords(user, number){
@@ -258,6 +272,55 @@ async function getLastXFullRecords(user, number){
     return value;
 }
 
+
+//Unique - if set to yes will count multiple of same chapter only once
+async function getBookChapterStat(user, unique = false){
+    var bookCountArray = await Record.aggregate( [
+        {
+            $match : {
+                user_id: user._id
+            }
+        },
+        {
+            $lookup : {
+                from: 'books',
+                localField: 'book',
+                foreignField: 'name',
+                as: 'book'
+            }
+        },
+        {
+            $project : {
+                book: { $arrayElemAt: ["$book", 0] },
+                chapters: "$chapters"
+            }
+        },
+        {
+            $group : {
+                _id: { "book": "$book" },
+                chapters: { $push: "$chapters" },
+                booksInfo: {"$addToSet": "$book"}
+            }
+        },
+        {
+            $project : {
+                chapters: {
+                    $size : {
+                        $reduce: {
+                            input: "$chapters",
+                            initialValue: [],
+                            in: unique ? { $setUnion: [ "$$value", "$$this" ] } : { $concatArrays: [ "$$value", "$$this" ] }
+                        }
+                    }
+                  },
+                  book: {$arrayElemAt: ["$booksInfo", 0]}
+            }
+        }
+    ]);
+    return bookCountArray;
+}
+
+//Counts multiple of same chapter as 1
 async function getTestamentChapterStat(user){
     var testamentCountArray = await Record.aggregate( [
         {
