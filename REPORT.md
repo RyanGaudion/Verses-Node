@@ -10,7 +10,9 @@ In addition to this, the Bible does not have to be read chronologically, making 
 My application provides a way to keep track of your progress through the Bible and also provides statistics on your reading habits in order to assist you in reading the entire Bible.
 
 # System Overview
-This application is built with an MVC (Model, View, Controller) architecture, using Node.js for the backend, connecting to a MongoDB database while using EJS, Tailwind CSS & AlpineJS for the views.
+This application is built with an MVC (Model, View, Controller) architecture, using Node.js for the backend, connecting to a MongoDB database while using EJS, Tailwind CSS & AlpineJS for the views. The reason for using Node.js alongside Express.js is its ability to run JavaScript as the server-side rather than in the frontend browser. The Node.JS stack allows quick iterations and fast development due to the fact it uses JavaScript which is an interpreted language. This allows me to change code and quickly see its effect without having to wait for the code to compile.
+
+The reason I chose the MVC architecture for the application is due to the fact it is a well proven architecture that has been used for thousands of production applications. It provides easier maintainability and expansion of the codebase through the loose coupling between the Models, Views & Controllers.  
 
 The reason for using a non-relational database like MongoDB was due to the read & write simplicity it provides as well as the performance benefits too `(5)` One downside of non-relational & NoSQL databases is data integrity however this application does not require high data consistency making MongoDB a perfect choice.
 
@@ -44,7 +46,7 @@ Finally, this page has 2 buttons "Bookmark/Unbookmark" and "Save". This allows t
 
 The Stats Page is split into 2 main sections, quick statistics (which provide short summaries such as how many chapters have been read in the last 30 days, or what percentage of the Bible is complete) and the monthly graph (which shows in a chart how many chapters have been read per month for the last year).
 
-These statistics are calculated using multiple complex MongoDB aggregation pipelines and are then displayed on screen via EJS. The graph provides data visualisation for the user to easily see their current reading habit vs previous months. This also uses aggregation for its data as well as AlpineJS and TailwindCSS for the graph's UI. 
+These statistics are calculated using multiple complex MongoDB aggregation pipelines and are then displayed on screen via EJS. The graph provides data visualisation for the user to easily see their current reading habit vs previous months. This also uses aggregation for its data as well as AlpineJS and TailwindCSS for the graph's UI. The reason I chose to use aggregation pipelines for statistic calculations is due to their high performance on realtime data. As an alternative I could have re-calculated statistics on every new record being added to the database however this would not only reduce write performance but would also increase the size of the database.
 
 ![Stats](./images/StatsPage.png)
 
