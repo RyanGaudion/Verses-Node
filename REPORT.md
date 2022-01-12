@@ -10,7 +10,7 @@ In addition to this, the Bible does not have to be read chronologically, making 
 My application provides a way to keep track of your progress through the Bible and also provides statistics on your reading habits in order to assist you in reading the entire Bible.
 
 # System Overview
-This application is built with an MVC (Model, View, Controller) architecture, using Node.js for the backend, connecting to a MongoDB database while using EJS, Tailwind CSS & AlpineJS for the views. The reason for using Node.js alongside Express.js is its ability to run JavaScript as the server-side rather than in the frontend browser. The Node.JS stack allows quick iterations and fast development due to the fact it uses JavaScript which is an interpreted language. This allows me to change code and quickly see its effect without having to wait for the code to compile.
+This application is built with an MVC (Model, View, Controller) architecture, using Node.js for the backend, connecting to a MongoDB database while using EJS, Tailwind CSS & AlpineJS for the views. The reason for using Node.js alongside Express.js is its ability to run JavaScript on the server-side rather than in the frontend browser. The Node.JS stack allows quick iterations of code and faster development work due to the fact it uses JavaScript which is an interpreted language. This allows me to change code and quickly see its effect without having to wait for the code to compile.
 
 The reason I chose the MVC architecture for the application is due to the fact it is a well proven architecture that has been used for thousands of production applications. It provides easier maintainability and expansion of the codebase through the loose coupling between the Models, Views & Controllers.  
 
