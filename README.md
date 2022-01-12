@@ -1,7 +1,8 @@
 # Verses
 This application is a Bible Tracking app that allows you to track your reading progress of the bible. It allows you to add daily reading records and creates a stats page of different stats such as your percentage through the whole bible, your progress of the old & new testament as well as a month by month bar chart so you can see your progress over time.
 
-The application is now live at: [http://stark-shelf-50242.herokuapp.com/](http://stark-shelf-50242.herokuapp.com/)
+The application is now live at: [http://verses-eu.herokuapp.com/](http://verses-eu.herokuapp.com/)  
+The application landing page for beta signups is available at: [http://versesapp.duckdns.org/](http://versesapp.duckdns.org/) | [(Repo)](https://github.com/RyanGaudion/Verses-Landing)
 
 
 ## Technologies
