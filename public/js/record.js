@@ -1,10 +1,12 @@
-function bookData(inputRecord) {
+function bookData(inputObj) {
+   var { record, currentBook } = inputObj
     return {
       selectedBookName: '',
       selectedStart: '',
       selectedEnd: '',
       counter: 1,
-      currentRecord: inputRecord,
+      currentBook: currentBook,
+      currentRecord: record,
       get currentItem(){
         var result =  typeof this.selectedBookName !== 'undefined' ? this.books.filter(i => i.name == this.selectedBookName)[0] : {chapters: 0};
         return typeof result !== 'undefined' ? result : {chapters: 0};
@@ -26,10 +28,15 @@ function bookData(inputRecord) {
           .then(() => this.defaultValue());
       },
       defaultValue(){
-        if(this.currentRecord){
+        if(this.currentRecord.book){
           this.selectedBookName = this.currentRecord.book;
           this.selectedStart = this.currentRecord.chapters[0];
           this.selectedEnd = this.currentRecord.chapters[this.currentRecord.chapters.length -1];
+        }
+        else{
+          this.selectedBookName = this.currentBook.name;
+          this.selectedStart = this.currentBook.chapter;
+          this.selectedEnd = this.currentBook.chapter;
         }
       }
     };

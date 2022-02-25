@@ -29,7 +29,7 @@
                     <input type="hidden" name="recordId" id="recordId" value="<%= record._id %>"/>
                       <!--Book Component-->
                         <div
-                          x-data="bookData(<%= JSON.stringify(record) %>)" 
+                          x-data="bookData(<%= JSON.stringify({ record, currentBook }) %>)" 
                           x-init="init()"
                           class="rounded-md shadow-sm space-y-2">
 

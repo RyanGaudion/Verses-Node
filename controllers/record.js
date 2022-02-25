@@ -142,13 +142,16 @@ exports.delete = async(req, res) => {
 
 exports.record = async(req, res) => {
     try{
+        const user = await User.findById(req.session.userID);
+        const book = await getCurrentBook(user);
+
         if(req.query.recordId){
-            const user = await User.findById(req.session.userID);
             const recordId = req.query.recordId;
             const record = await Record.findById(recordId);
+            
     
             if(record && record.user_id.toString() == user._id.toString()){
-                res.render("record", {_pageName: "record", record: record});
+                res.render("record", {_pageName: "record", record: record, currentBook: book});
             }
             else{
                 console.log("Record was null or user did not match");
@@ -156,7 +159,7 @@ exports.record = async(req, res) => {
             }
         }
         else{
-            res.render("record", {_pageName: "record", record: {}});
+            res.render("record", {_pageName: "record", record: {}, currentBook: book});
         }
     }
     catch(e){
@@ -179,7 +182,7 @@ exports.stats = async (req, res) => {
         */
 
         //80ms performance benefit
-        let [monthCountStat, testamentStat, mostReadBook, last30days, last7days, currentBookName] = await Promise.all(
+        let [monthCountStat, testamentStat, mostReadBook, last30days, last7days, currentBook] = await Promise.all(
             [getMonthChapterStat(user), getTestamentChapterStat(user), getMostReadBook(user), getLastXDaysCount(user, 30), getLastXDaysCount(user, 7), getCurrentBook(user)]);
 
         
@@ -194,7 +197,7 @@ exports.stats = async (req, res) => {
             monthCount: monthCountStat, 
             progressCount: testamentChaptersStat,
             lastSevenDays: last7days,
-            currentBookName: currentBookName,
+            currentBook: currentBook,
             mostReadBook: mostReadBook,
             lastThirtyDays: last30days
         });
@@ -216,14 +219,14 @@ async function getCurrentBook(user){
         try{
             var nextBook = (await Book.find({number: lastRecord.book.number + 1}))[0];
             if(nextBook && nextBook.name){
-                return nextBook.name;
+                return {name: nextBook.name, chapter: 1};
             }
         }
         catch(e){
             console.log(e);
         }
     }
-    return lastRecord?.book?.name || "N/A";
+    return {name: lastRecord?.book?.name, chapter: lastRecord?.chapters[lastRecord?.chapters?.length - 1] + 1}  || "N/A";
 }
 
 async function getMostReadBook(user){
